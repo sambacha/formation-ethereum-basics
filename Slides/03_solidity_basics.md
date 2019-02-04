@@ -1,0 +1,340 @@
+# Getting started with solidity
+
+<!-- .slide: class="page-title" -->
+
+
+
+## Summary
+
+<!-- .slide: class="toc" -->
+
+- [Blockchain key concepts](#/1)
+- [Ethereum basics](#/2)
+- **[Getting started with solidity](#/3)**
+- [Tooling](#/4)
+- [Unit testing on Truffle](#/5)
+- [More on Solidity](#/6)
+- [Deploy your smart contract](#/7)
+- [Oracles](#/8)
+- [Decentralised hosting](#/9)
+- [On smart contract security](#/10)
+- [What's next on Ethereum](#/11)
+
+
+
+## Solidity
+
+<figure> 
+    <img src="ressources/solidity-logo.svg" alt="solidity logo" height="270px"/>
+</figure>
+
+Notes :
+From solidity doc :
+Solidity is a contract-oriented, high-level language for implementing smart contracts. It was influenced by C++, Python and JavaScript and is designed to target the Ethereum Virtual Machine (EVM).
+
+Solidity is statically typed, supports inheritance, libraries and complex user-defined types among other features.
+
+
+
+## Pragma
+
+Specify the solidity language version
+
+```Javascript
+pragma solidity ^0.5.1;
+```
+
+Last version is ^0.5.1
+
+
+
+## Contract definition
+
+```Javascript
+contract HelloWorld {
+
+}
+```
+
+
+## Variables : integer
+
+```Javascript
+contract HelloWorld {
+    uint anUnsignedInteger = 400;
+}
+```
+
+<!-- .element style="margin-top:50px"-->
+**int8 to int 256/ uint8 to uint256**: Signed and unsigned integers of various sizes. Keywords uint8 to uint256 in steps of 8 (unsigned of 8 up to 256 bits) and int8 to int256. uint and int are aliases for uint256 and int256, respectively.
+
+<!-- .element style="margin-top:50px"-->
+**Operators**:
+
+*Comparisons* : <=, <, ==, !=, >=, >
+
+*Bit operators* : &, |, ^ (bitwise exclusive or), ~ (bitwise negation)
+
+*Arithmetic operators* : +, -, unary -, unary +, \*, /, % (remainder),   \*\* (exponentiation), << (left shift), >> (right shift)
+
+
+
+## Import
+
+Very similar to ES6 format :
+1)
+```Javascript
+import "filename";
+```
+
+2)
+```Javascript
+import * as symbolName from "filename";
+```
+
+3)
+```Javascript
+import {symbol1 as alias, symbol2} from "filename";
+```
+
+Notes :
+1) This statement imports all global symbols from “filename” (and symbols imported there) into the current global scope (different than in ES6 but backwards-compatible for Solidity).
+2) creates a new global symbol symbolName whose members are all the global symbols from "filename".
+3) creates new global symbols alias and symbol2 which reference symbol1 and symbol2 from "filename", respectively.
+
+
+
+## Array
+
+Arrays can have be fixed-sized or dynamic-sized.
+```Javascript
+pragma solidity ^0.4.16;
+contract C {
+    function f(uint len) public pure {
+        uint[] memory a = new uint[](7);
+        bytes memory b = new bytes(len);
+        a[6] = 8;
+    }
+}
+```
+
+
+## Structs
+
+
+
+## Mapping
+
+
+
+## State variables visibility
+
+- **public** : can be accessed by everyone. Solidity automatically generates a getter for a public variable.
+- **internal**  (default): can only be accessed internally and only from the contract itself.
+- **private** : can only be accessed internally and only from the contract itself.
+
+
+
+## Method visibility 
+
+- **public** - all can access
+- **external** - Cannot be accessed internally, only externally
+- **internal** - only this contract and contracts deriving from it can access
+- **private** - can be accessed only from this contract
+
+Notes : if your method is only called externally, use external every time, as it costs less gaz (the method parameters aren't copied in memory).
+
+
+
+
+## Variables : addresses
+
+**address**: Holds a 20 byte value (size of an Ethereum address). Address types also have members and serve as a base for all contracts.
+
+**Operators**:
+
+<=, <, ==, !=, >= and >
+
+
+
+## Variables : addresses
+
+Members : 
+- balance
+- transfer
+- call
+- delegateCall
+- send
+
+```Javascript
+address x = 0x123;
+address myAddress = this;
+if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
+myAddress.call.gas(1000000).value(1 ether)("register", "MyName");
+```
+
+Notes : 
+It is possible to query the balance of an address using the property balance and to send Ether (in units of wei) to an address using the transfer function
+
+transfer : call the fallback function of the contract and send ether in a secure way. If the call fail, the transaction is reverted.
+
+send : the transaction must be explicitely reverted in the send fail, you have to check for the returned value
+
+call and delegatecall:  takes an arbitrary number of arguments of any type. These arguments are padded to 32 bytes and concatenated. The modifiers gas and value allow to specify a gaz number and send some ether with the transaction
+
+delegatecall : same as called except that only the code of the given address is used, all other aspects (storage, balance, …) are taken from the current contract. The purpose of delegatecall is to use library code which is stored in another contract. 
+
+
+
+## Variables : bool
+
+**bool** : The possible values are constants **true** and **false**.
+
+<!-- .element style="margin-top:50px"-->
+**Operators** :
+
+! (logical negation)
+&& (logical conjunction, “and”)
+|| (logical disjunction, “or”)
+== (equality)
+!= (inequality)
+
+
+
+## About fixed point number
+Fixed point numbers are not fully supported by Solidity yet. They can be declared, but cannot be assigned to or from.
+
+
+
+## Variables : Fixed-size byte arrays
+
+**bytes1**, **bytes2**, **bytes3**, …, **bytes32**. **byte** is an alias for **bytes1**.
+
+**Operators** :
+
+Comparisons: <=, <, ==, !=, >=, > (evaluate to bool)
+Bit operators: &, |, ^ (bitwise exclusive or), ~ (bitwise negation), << (left shift), >> (right shift)
+Index access: If x is of type bytesI, then x[k] for 0 <= k < I returns the k th byte (read-only).
+The shifting operator works with any integer type as right operand (but will return the type of the left operand), which denotes the number of bits to shift by. Shifting by a negative amount will cause a runtime exception.
+
+**Members** :
+
+.length yields the fixed length of the byte array (read-only).
+
+
+
+## Variables : Dynamically-sized byte array
+**bytes** : Dynamically-sized byte array, see Arrays. Not a value-type!
+**string** : Dynamically-sized UTF-8-encoded string, see Arrays. Not a value-type!
+
+
+Notes: As a rule of thumb, use bytes for arbitrary-length raw byte data and string for arbitrary-length string (UTF-8) data. If you can limit the length to a certain number of bytes, always use one of bytes1 to bytes32 because they are much cheaper.
+
+
+
+## Enums 
+
+```Javascript
+contract test {
+    enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
+    ActionChoices choice;
+    ActionChoices constant defaultChoice = ActionChoices.GoStraight;
+
+    function setGoStraight() public {
+        choice = ActionChoices.GoStraight;
+    }
+}
+```
+
+
+
+## Solidity compiler
+
+Solidity is a compiled language.
+The solidity compiler, *solc* is a command-line program used like this : 
+
+Print the compiled binary file :
+```Bash
+solc --bin sourceFile.sol
+```
+
+Output everything to separate files
+```Bash
+solc -o outputDirectory --bin --ast --asm sourceFile.sol
+```
+
+If your contract use a library : 
+```Bash
+solc -o outputDirectory --bin --ast --asm sourceFile.sol
+```
+
+Notes : 
+The compiler can produce various outputs, ranging from simple binaries and assembly over an abstract syntax tree (parse tree).
+
+
+
+## Natspec comment
+
+Natspec comment are comments made using triple slashes : **///**
+They can be used like regular comments (//) to comment the code.
+But they will also be used to show the smart contract user a message while calling the contract.
+
+Example : 
+```Javascript
+    /// Create a simple auction with `_biddingTime`
+    /// seconds bidding time on behalf of the
+    /// beneficiary address `_beneficiary`.
+    constructor(
+        uint _biddingTime,
+        address _beneficiary
+    ) public {
+        beneficiary = _beneficiary;
+        auctionEnd = now + _biddingTime;
+    }
+```
+
+
+## Constructor
+```Javascript
+   constructor(
+        uint _biddingTime,
+        address _beneficiary
+    ) public {
+        beneficiary = _beneficiary;
+        auctionEnd = now + _biddingTime;
+    }
+```
+
+
+
+## Function
+
+```Javascript
+function (<parameter types>) {internal|external} [pure|constant|view|payable] [returns (<return types>)]
+```
+
+Functions can be assigned to variables and pass to other function, like in Javacript.
+
+Lambda or inline functions are planned but not yet supported.
+
+
+Notes :
+internal/external : 
+Internal functions can only be called inside the current contract (more specifically, inside the current code unit, which also includes internal library functions and inherited functions) because they cannot be executed outside of the context of the current contract. Calling an internal function is realized by jumping to its entry label, just like when calling a function of the current contract internally.
+
+External functions consist of an address and a function signature and they can be passed via and returned from external function calls.
+
+Functions are internal by default.
+
+
+
+## Inherance
+
+
+
+## If
+
+
+
+
+
