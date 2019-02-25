@@ -151,6 +151,10 @@ The transactions, receipts and state tries roots allow ethereum light client to 
 
 
 
+# Binary Merkle tree
+
+
+
 ## Binary Merkle tree
 
 <!-- .element style="margin-top:170px"-->
@@ -208,12 +212,21 @@ Source : @AntoineCailly : le web décentralisé
 </figure>
 
 <!-- .element style="text-align:center;color:Gainsboro"-->
-Source : @AntoineCailly : le web décentralisé
+Source : @AntoineC
+
+
 
 ## Merkle Patricia tree
-TODO images
+<figure> 
+    <img src="ressources/patricia-merkle-tree.png" alt="patricia merkel tree" height="550px"/>
+</figure>
+
+<!-- .element style="text-align:center;color:Gainsboro"-->
+Source : https://ethereum.stackexchange.com/questions/6415/eli5-how-does-a-merkle-patricia-trie-tree-work
 
 Notes :
+
+Patricia = Practical Algorithm To Retrieve Information Coded In Alphanumeric 
 In Ethereum, the merkle tree has been taken one step further with the merkle patricia tree.
 Merkle tree is good for fixed structures, which doesn't need to be edited after creation.
 For the world state tree, Ethereum had the need to be able to have a data structure quickly updatable after a change, and this, without recomputing the entire tree.
@@ -469,7 +482,7 @@ This make the Ethereum blockchain the first world wide decentralized computer.
 
 ## No bug fix on a smart contract
 
-The philisophy of smart contracts  are that they can be trusted because rules are defined by code.
+The philosophy of smart contracts  are that they can be trusted because rules are defined by code.
 
 <!-- .element style="margin-top:50px"-->
 Those rules are supposed to be permanent so that when a user send a transaction to your contract, he's confidently doing so because he is agreeing with thoses rules and is trusting them never to change.
@@ -532,7 +545,7 @@ Notes : a first bug allowed an attacker to steal 3O million dollars worth of eth
 
 
 
-## Gaz unit and gaz fees
+## Gaz concept
 
 *Gaz unit :* a unit of network power that can be purchase with Ether. 
 
@@ -545,7 +558,6 @@ The gaz price is fixed thought a consensus between miners and users.
 
 <!-- .element style="margin-top:50px"-->
 *Gaz fees : * Sum of all gaz unit consumed by the transaction. The price paid by a user to the miners to call a transaction on a smart contract.  
-
 
 Notes : 
 
@@ -598,6 +610,12 @@ Source : hackernoon.com/crossing-over-to-web3-an-introduction-to-decentralised-d
 
 
 
+## D-app demo
+
+<!-- .slide: class="page-demo" -->
+
+
+
 ## EVM 
 
 The Ethereum Virtual Machine (EVM) is the runtime environment for smart contracts in Ethereum. 
@@ -607,15 +625,24 @@ It is a 256-bit register stack, designed to run the same code on all network nod
 Ethereum Virtual Machines have been implemented in C++, Go, Haskell, Java, JavaScript, Python, Ruby, Rust, and WebAssembly.
 
 
-
-## TP : Setup your own private Ethereum blockchain
-
-<!-- .slide: class="page-demo" -->
+# Some ethereum wallet
 
 
 
+## Mist
 
 
 
+## Geth
+
+
+
+## Parity
+
+
+
+# TP : Setup your private Ethereum blockchain
+
+<!-- .slide: class="page-tp1" -->
 
 

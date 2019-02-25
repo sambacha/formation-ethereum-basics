@@ -22,6 +22,63 @@
 
 
 
+## Block and Transaction Properties
+*block.blockhash(uint blockNumber) returns (bytes32)*: hash of the given block - only works for 256 most recent, excluding current, blocks - deprecated in version 0.4.22 and replaced by blockhash(uint blockNumber).
+
+*block.coinbase (address)*: current block miner’s address
+
+*block.difficulty (uint)*: current block difficulty
+
+*block.gaslimit (uint)*: current block gaslimit
+
+block.number (uint): current block number
+
+block.timestamp (uint): current block timestamp as seconds since unix epoch
+
+gasleft() returns (uint256): remaining gas
+
+msg.data (bytes): complete calldata
+
+msg.gas (uint): remaining gas - deprecated in version 0.4.21 and to be replaced by gasleft()
+
+msg.sender (address): sender of the message (current call)
+
+msg.sig (bytes4): first four bytes of the calldata (i.e. function identifier)
+
+msg.value (uint): number of wei sent with the message
+
+now (uint): current block timestamp (alias for block.timestamp)
+
+tx.gasprice (uint): gas price of the transaction
+
+tx.origin (address): sender of the transaction (full call chain)
+
+
+
+## Import
+
+Very similar to ES6 format :
+1)
+```Javascript
+import "filename";
+```
+
+2)
+```Javascript
+import * as symbolName from "filename";
+```
+
+3)
+```Javascript
+import {symbol1 as alias, symbol2} from "filename";
+```
+Notes :
+1) This statement imports all global symbols from “filename” (and symbols imported there) into the current global scope (different than in ES6 but backwards-compatible for Solidity).
+2) creates a new global symbol symbolName whose members are all the global symbols from "filename".
+3) creates new global symbols alias and symbol2 which reference symbol1 and symbol2 from "filename", respectively.
+
+
+
 ## The msg struct
 
 Automatically available in every functions.
@@ -237,6 +294,67 @@ contract MyContract{
   function() payable public { }
 }
 ```
+
+
+
+## Contract-related variables
+
+*this* (current contract’s type):
+the current contract, explicitly convertible to Address
+
+*selfdestruct*(address recipient):
+destroy the current contract, sending its funds to the given Address
+
+
+
+## Mathematical and Cryptographic Functions
+
+```Javascript
+addmod(x, y, k);
+```
+compute (x + y) % k where the addition is performed with arbitrary precision and does not wrap around at 2\*\*256. 
+
+```Javascript
+mulmod(x, y, k);
+```
+compute (x \* y) % k where the multiplication is performed with arbitrary precision and does not wrap around at 2\*\*256.
+
+```Javascript
+keccak256(...);
+sha3(...);
+sha256(...);
+```
+
+compute the Ethereum-SHA-3 (Keccak-256) or the SHA-256 hash of the  arguments
+
+
+
+## Error Handling
+
+```Javascript
+assert(condition);
+```
+invalidates the transaction if the condition is not met - to be used for internal errors.
+
+```Javascript
+require(condition);
+```
+reverts if the condition is not met - to be used for errors in inputs or external components.
+
+```Javascript
+require(condition, 'message erreur');
+```
+reverts if the condition is not met - to be used for errors in inputs or external components. Also provides an error message.
+
+```Javascript
+revert();
+```
+abort execution and revert state changes
+
+```Javascript
+revert('reason');
+```
+abort execution and revert state changes, providing an explanatory string
 
 
 

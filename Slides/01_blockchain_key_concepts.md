@@ -741,13 +741,11 @@ In that case, the mining ressources will be divided into two factions : the ones
 
   - those who don't
 
-
 Notes : The software upgrade introduces a new rule to the network that isn't compatible with the older software (A new rule that allows block size to be 2MB instead of 1MB would require a hard fork).
 
 What happens? Nodes that continue running the old version of the software will see the new transactions as invalid. So, to switch over to the new chain and to continue to mine valid blocks, all of the nodes in the network need to upgrade to the new rules.
 
 Therefore two chains will be created based on a common history, and the mining power of both network will be divided (hence degrading the security of the blockchain).
-
 
 The ethereum DAO hard fork was a perfect case study of how a community can split over rules. Now, we have two blockchains using a variant of the software - ethereum and ethereum classic, both of which boast a different ethos and a different currency.
 
@@ -1065,8 +1063,6 @@ Difficulty = original_target / target
 <!-- .element style="margin-top:50px;text-align-center;"-->
 **Meaning : it's now 4,306,949,573,981.51 times more difficult to mine a block now than it was on the first block**
 
-
-
 Notes : The target is a 256-bit number (extremely large) that all Bitcoin clients share. The difficulty is relatively small compare to the max possible number represented by a hash. So what it means is that the candidate block header double hash must begin with a specific number of zeros to be lower than the target. This number of zeros depends on the difficulty setted by the network. This difficulty is adjusted every 2016 blocks (around two weeks time) to adapt to the current hasrate ( number of hash operations performed by all miners / second). This difficulty is finely tuned in order for a block to be mined approximately every 10 minutes, notwithstanding the number of miners currently on the network. 
 Sources : http://learnmeabitcoin.com/glossary/target
 
@@ -1208,7 +1204,6 @@ A **validator** :
 - sends an amount of the blockchain money to a vault,
 - this money is locked and is called the stack,
 - the more stack, he send, the more voting power he gets to select the next block,
-
 
 Notes : Validators are node whose possesors had sent a deposit ( in the blockchain currency) to a vault (a smart contract). The amount of its deposit give him a percentage of chances to be selected to elect the next block. The more money the validator had staked, the more voting he gets. The money he deposited is locked (he cannot do anything with it), until he unstake it (losing his voting power in the process).
 
@@ -1425,3 +1420,21 @@ What you can do with a 51% attack :
 
 What you cannot do : 
 - impersonnate another member of the network : you can't spend a coin that is not your as you still don't have the private key needed,
+
+
+
+# The three types of blockchain
+
+
+
+## Public blockchains
+
+
+
+## Consensus blockchains
+
+
+
+## Private blockchains
+
+

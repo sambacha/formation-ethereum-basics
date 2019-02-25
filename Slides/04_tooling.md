@@ -27,8 +27,12 @@
 Quickly create a test blockchain, with some account already initialized and alimented with ether, linked to a block explorer to check te results of your tests.
 
 
-## Remix IDE
 
+<!-- .slide: class="page-demo" -->
+
+
+
+## Remix IDE
 
 The best option to quickly test Solidity :
 
@@ -63,19 +67,39 @@ Allow you to easily :
 
 ## Truffle
 
-A framework which simplify a lot the deployment, unit testing
+A framework which simplify a lot the smart contract development.
+
+<!-- .element style="margin-top:50px"-->
+It provides tooling to :
+
+- manage your smart contract lifecycle
+- automate your smart contract testing
+- automate and script your smart contract deployment and migrations
+- handle simply multiple ethereum network
+- provide other tools like an interactive console and an external script runner
+
+Notes :
+Manage your smart contract lifecycle =>
+Truffle takes care of managing your contract artifacts so you don't have to. Includes support for custom deployments, library linking and complex Ethereum applications.
+
+Automate your smart contrac testing =>
+Provide a test suite to unit test your SM in both JavaScript and Solidity
+
+Automate and script your smart contract deployment and migrations =>
+Allow you to write simple, manageable deployment scripts that acknowledge your application will change over time.
+
+Handle simply multiple ethereum network =>
+Don't manage network artifacts ever again. Let Truffle do it for you, and put your focus on dapp development where it belongs.
 
 
 
 ## Metamask
 
+MetaMask is the easiest way to interact with dapps in a browser. It is an extension for Chrome or Firefox that connects to an Ethereum network without running a full node on the browser's machine. It can connect to the main Ethereum network, any of the testnets (Ropsten, Kovan, and Rinkeby), or a local blockchain such as the one created by Ganache or Truffle Develop.
 
-
-## Ganache
-
-A test blockchain for your development environment.
-Available on cli or GUI
-The GUI has a useful block explorer
+<figure> 
+    <img src="ressources/metamask.png" alt="metamask" height="300px"/>
+</figure>
 
 
 
