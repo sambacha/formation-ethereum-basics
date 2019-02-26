@@ -11,14 +11,13 @@
 - [Blockchain key concepts](#/1)
 - [Ethereum basics](#/2)
 - [Getting started with solidity](#/3)
-- [Tooling](#/4)
+- [Truffle and smart contract deployment](#/4)
 - [Unit testing on Truffle](#/5)
-- **[More on Solidity](#/6)**
-- [Deploy your smart contract](#/7)
-- [Oracles](#/8)
-- [Decentralised hosting](#/9)
-- [On smart contract security](#/10)
-- [What's next on Ethereum](#/11)
+- [D-apps](#/6)
+- **[More on Solidity](#/7)**
+- [Introduction to Oracles](#/8)
+- [Smart contract security and blockchain cost](#/9)
+- [What's next on Ethereum](#/10)
 
 
 
@@ -55,27 +54,7 @@ tx.origin (address): sender of the transaction (full call chain)
 
 
 
-## Import
 
-Very similar to ES6 format :
-1)
-```Javascript
-import "filename";
-```
-
-2)
-```Javascript
-import * as symbolName from "filename";
-```
-
-3)
-```Javascript
-import {symbol1 as alias, symbol2} from "filename";
-```
-Notes :
-1) This statement imports all global symbols from “filename” (and symbols imported there) into the current global scope (different than in ES6 but backwards-compatible for Solidity).
-2) creates a new global symbol symbolName whose members are all the global symbols from "filename".
-3) creates new global symbols alias and symbol2 which reference symbol1 and symbol2 from "filename", respectively.
 
 
 
@@ -357,9 +336,9 @@ revert('reason');
 abort execution and revert state changes, providing an explanatory string
 
 
+# TP 7 : Adding the betting functionality
+<!-- .slide: class="page-tp5" -->
+
+
 
 <!-- .slide: class="page-questions" -->
-
-
-
-<!-- .slide: class="page-tp4" -->

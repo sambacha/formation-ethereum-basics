@@ -11,14 +11,13 @@
 - [Blockchain key concepts](#/1)
 - [Ethereum basics](#/2)
 - **[Getting started with solidity](#/3)**
-- [Tooling](#/4)
+- [Truffle and smart contract deployment](#/4)
 - [Unit testing on Truffle](#/5)
-- [More on Solidity](#/6)
-- [Deploy your smart contract](#/7)
-- [Oracles](#/8)
-- [Decentralised hosting](#/9)
-- [On smart contract security](#/10)
-- [What's next on Ethereum](#/11)
+- [D-apps](#/6)
+- [More on Solidity](#/7)
+- [Introduction to Oracles](#/8)
+- [Smart contract security and blockchain cost](#/9)
+- [What's next on Ethereum](#/10)
 
 
 
@@ -315,5 +314,78 @@ Notes : if your method is only called externally, use external every time, as it
 
 
 
+## For
+
+
+
+## Remix IDE
+
+The best option to quickly test Solidity :
+
+Online editor : https://remix.ethereum.org/
+
+Can also be installed locally.
+
+
+
+## Remix IDE - Solidity Editor
+<figure> 
+    <img src="ressources/remix_editor.png" alt="remix editor" height="300px"/>
+</figure>
+
+Allow you to easily : 
+
+- write and compile a smart contract
+
+- test it using solidity test cases
+
+- deploy it on a ethereum network
+
+- debug it
+
+
+
+## Remix IDE - Demo
+
+<!-- .element style="margin-top:150px"-->
+<figure> 
+    <img src="ressources/demo.png" alt="demo" height="300px"/>
+</figure>
+
+Notes : 
+Here’s the list of some important features:
+
+Solidity editor : 
+It display opened files as tabs.
+Remix saves the current file continuously (5s after the last changes)
++/- on the top left corner enable you to increase/decrease the font size of the editor
+
+Smart contract compilation : 
+Compilation Warning and Error are displayed in the gutter
+Autocompile every 5 seconds
+Publishing your contract to Swarm (decentralized file system)
+
+Javascript VM : 
+RemixIDE can simulate an Ethereum network thought a Javascript VM
+
+
+
+## Our common goal during this training
+
+A D-App allowing users to gamble on football matchs in a decentralized fashion.
+
+
+
+## The result
+<!-- .element style="margin-top:150px"-->
+<figure> 
+    <img src="ressources/demo.png" alt="demo" height="300px"/>
+</figure>
+
+
+
+# TP - First smart contract on Remix IDE
+
+<!-- .slide: class="page-tp2" -->
 
 
