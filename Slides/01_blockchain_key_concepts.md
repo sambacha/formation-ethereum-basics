@@ -1428,12 +1428,78 @@ What you cannot do :
 
 ## Public blockchains
 
+<figure> 
+    <img src="ressources/public_blockchain.png" alt="public_blockchain" height="500px"/>
+</figure>
+
+<!-- .element style="text-align:center;color:Gainsboro"-->
+Source : [Utilization of Distributed Technologies for Custom Solutions on Medium](https://medium.com/applicature/utilization-of-distributed-technologies-for-custom-solutions-public-private-and-hybrid-570a1e14852)
 
 
-## Consensus blockchains
+
+## Public blockchains
+**Pros :**
+
+- everyone can transact and participate in the consensus
+- everyone can audit all the blockchain datas at any time
+- secured by a large network
+
+<!-- .element style="margin-top:50px"-->
+**Cons :** 
+
+- costly
+- not scalable (for now)
+- no data privacy
+
+
+
+## Hybrid blockchains
+
+<figure> 
+    <img src="ressources/hybrid_blockchain.png" alt="hybrid blockchain" height="500px"/>
+</figure>
+
+<!-- .element style="text-align:center;color:Gainsboro"-->
+Source : [Utilization of Distributed Technologies for Custom Solutions on Medium](https://medium.com/applicature/utilization-of-distributed-technologies-for-custom-solutions-public-private-and-hybrid-570a1e14852)
+
+
+
+## Hybrid blockchains
+
+**Pros :**
+
+- a authorization module decides who can send transaction, participate to the consensus or read datas,
+- secured channel allows users to communicate privatly,
+- reduced costs,
+- currently great to implement business usecases.
+
+<!-- .element style="margin-top:50px"-->
+**Cons :** 
+
+- the authorization module is not decentralized
 
 
 
 ## Private blockchains
 
+<figure> 
+    <img src="ressources/private_blockchain.png" alt="private blockchain" height="500px"/>
+</figure>
 
+<!-- .element style="text-align:center;color:Gainsboro"-->
+Source : [Utilization of Distributed Technologies for Custom Solutions on Medium](https://medium.com/applicature/utilization-of-distributed-technologies-for-custom-solutions-public-private-and-hybrid-570a1e14852)
+
+
+
+## Private blockchains
+
+**Pros :**
+
+- a central authority decides who can send transaction, participate to the consensus or read datas,
+- datas are safes.
+
+<!-- .element style="margin-top:50px"-->
+**Cons :** 
+
+- the central authority,
+- a glorified database ?
