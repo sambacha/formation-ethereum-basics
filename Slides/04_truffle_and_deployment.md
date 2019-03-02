@@ -78,6 +78,7 @@ A smart contracts must to be compiled to byte code before it can be deployed on 
 ##  ABI (Application Binary Interface)
 
 The ABI is necessary for defining how the contract can be interacted with, and how data is extracted from the raw bytes on the wire.
+It describes the interface of your smart contract with all the methods and members described. The contract abstraction libraries, like web3.js, use this ABI to interact with the deployed contract. 
 
 
 

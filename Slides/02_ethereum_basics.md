@@ -611,7 +611,18 @@ Source : hackernoon.com/crossing-over-to-web3-an-introduction-to-decentralised-d
 
 ## D-app demo
 
-<!-- .slide: class="page-demo" -->
+<figure> 
+    <img src="ressources/cryptokitty.png" alt="cryptokitty" height="550px"/>
+</figure>
+
+Notes : here, the demonstrator can show its audience a popular D-app of his choice.
+Personnaly, I'm showing the cryptokitties website with metamask on the main Ethereum network.
+You won't be able to purchase any kitties, unless you add some ether on your metamask real ethereum account, 
+but you will be able to do the tutorial and show the interactions with metamask.
+You can : 
+- explain better the gaz principle with metamask popup
+- the concept of non fungible token on which are based the cryptokitties
+- explain that this particular D-app has almost paralysed the entire ethereum network for a few month due to its popularity
 
 
 
