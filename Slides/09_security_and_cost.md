@@ -1,4 +1,4 @@
-# Oracles
+# Smart contract security and blockchain costs
 
 <!-- .slide: class="page-title" -->
 
@@ -15,16 +15,6 @@
 - [Unit testing on Truffle](#/5)
 - [D-apps](#/6)
 - [More on Solidity](#/7)
-- **[Introduction to Oracles](#/8)**
-- [Smart contract security and blockchain cost](#/9)
+- [Introduction to Oracles](#/8)
+- **[Smart contract security and blockchain cost](#/9)**
 - [What's next on Ethereum](#/10)
-
-
-
-## Oraclize 
-
- c’est avec un mécanisme de code open-source qui s’exécute sur un service cloud dont les logs sont affichés et accessibles h24 et peuvent êtres vérifiés par tout le monde
-
-
-
-<!-- .slide: class="page-tp5" -->

@@ -11,14 +11,13 @@
 - [Blockchain key concepts](#/1)
 - [Ethereum basics](#/2)
 - **[Getting started with solidity](#/3)**
-- [Tooling](#/4)
+- [Truffle and smart contract deployment](#/4)
 - [Unit testing on Truffle](#/5)
-- [More on Solidity](#/6)
-- [Deploy your smart contract](#/7)
-- [Oracles](#/8)
-- [Decentralised hosting](#/9)
-- [On smart contract security](#/10)
-- [What's next on Ethereum](#/11)
+- [D-apps](#/6)
+- [More on Solidity](#/7)
+- [Introduction to Oracles](#/8)
+- [Smart contract security and blockchain cost](#/9)
+- [What's next on Ethereum](#/10)
 
 
 
@@ -41,10 +40,10 @@ Solidity is statically typed, supports inheritance, libraries and complex user-d
 Specify the solidity language version
 
 ```Javascript
-pragma solidity ^0.5.1;
+pragma solidity ^0.5.4;
 ```
 
-Last version is ^0.5.1
+Last version is ^0.5.4
 
 
 
@@ -79,28 +78,94 @@ contract HelloWorld {
 
 
 
-## Import
+## Variables : addresses
 
-Very similar to ES6 format :
-1)
+**address**: Holds a 20 byte value (size of an Ethereum address). Address types also have members and serve as a base for all contracts.
+
+<!-- .element style="margin-top:50px"-->
+**Operators**:
+
+<=, <, ==, !=, >= and >
+
+
+
+## Variables : addresses
+
+Members : 
+
+- balance
+- transfer
+- call
+- delegateCall
+- send
+
+<!-- .element style="margin-top:50px"-->
+*Example :*
 ```Javascript
-import "filename";
+address x = 0x123;
+address myAddress = this;
+if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
+myAddress.call.gas(1000000).value(1 ether)("register", "MyName");
 ```
 
-2)
-```Javascript
-import * as symbolName from "filename";
-```
+Notes : 
+It is possible to query the balance of an address using the property balance and to send Ether (in units of wei) to an address using the transfer function
 
-3)
-```Javascript
-import {symbol1 as alias, symbol2} from "filename";
-```
+transfer : call the fallback function of the contract and send ether in a secure way. If the call fail, the transaction is reverted.
 
-Notes :
-1) This statement imports all global symbols from “filename” (and symbols imported there) into the current global scope (different than in ES6 but backwards-compatible for Solidity).
-2) creates a new global symbol symbolName whose members are all the global symbols from "filename".
-3) creates new global symbols alias and symbol2 which reference symbol1 and symbol2 from "filename", respectively.
+send : the transaction must be explicitely reverted in the send fail, you have to check for the returned value
+
+call and delegatecall:  takes an arbitrary number of arguments of any type. These arguments are padded to 32 bytes and concatenated. The modifiers gas and value allow to specify a gaz number and send some ether with the transaction
+
+delegatecall : same as called except that only the code of the given address is used, all other aspects (storage, balance, …) are taken from the current contract. The purpose of delegatecall is to use library code which is stored in another contract. 
+
+
+
+## Variables : bool
+
+**bool** : The possible values are constants **true** and **false**.
+
+<!-- .element style="margin-top:50px"-->
+**Operators** :
+
+- ! (logical negation)
+- && (logical conjunction, “and”)
+- || (logical disjunction, “or”)
+- == (equality)
+- != (inequality)
+
+
+
+## About fixed point number
+Fixed point numbers are not fully supported by Solidity yet. They can be declared, but cannot be assigned to or from.
+
+
+
+## Variables : Fixed-size byte arrays
+
+**bytes1**, **bytes2**, **bytes3**, …, **bytes32**. **byte** is an alias for **bytes1**.
+
+<!-- .element style="margin-top:50px"-->
+**Operators** :
+
+- Comparisons: <=, <, ==, !=, >=, > (evaluate to bool)
+- Bit operators: &, |, ^ (bitwise exclusive or), ~ (bitwise negation), << (left shift), >> (right shift)
+- Index access: x[k] for 0 <= k < I returns the k th byte (read-only).
+
+
+<!-- .element style="margin-top:50px"-->
+**Members** :
+
+- *.length* yields the fixed length of the byte array (read-only).
+
+
+
+## Variables : Dynamically-sized byte array
+**bytes** : Dynamically-sized byte array, see Arrays. Not a value-type!
+**string** : Dynamically-sized UTF-8-encoded string, see Arrays. Not a value-type!
+
+
+Notes: As a rule of thumb, use bytes for arbitrary-length raw byte data and string for arbitrary-length string (UTF-8) data. If you can limit the length to a certain number of bytes, always use one of bytes1 to bytes32 because they are much cheaper.
 
 
 
@@ -132,103 +197,6 @@ contract C {
 - **public** : can be accessed by everyone. Solidity automatically generates a getter for a public variable.
 - **internal**  (default): can only be accessed internally and only from the contract itself.
 - **private** : can only be accessed internally and only from the contract itself.
-
-
-
-## Method visibility 
-
-- **public** - all can access
-- **external** - Cannot be accessed internally, only externally
-- **internal** - only this contract and contracts deriving from it can access
-- **private** - can be accessed only from this contract
-
-Notes : if your method is only called externally, use external every time, as it costs less gaz (the method parameters aren't copied in memory).
-
-
-
-
-## Variables : addresses
-
-**address**: Holds a 20 byte value (size of an Ethereum address). Address types also have members and serve as a base for all contracts.
-
-**Operators**:
-
-<=, <, ==, !=, >= and >
-
-
-
-## Variables : addresses
-
-Members : 
-- balance
-- transfer
-- call
-- delegateCall
-- send
-
-```Javascript
-address x = 0x123;
-address myAddress = this;
-if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
-myAddress.call.gas(1000000).value(1 ether)("register", "MyName");
-```
-
-Notes : 
-It is possible to query the balance of an address using the property balance and to send Ether (in units of wei) to an address using the transfer function
-
-transfer : call the fallback function of the contract and send ether in a secure way. If the call fail, the transaction is reverted.
-
-send : the transaction must be explicitely reverted in the send fail, you have to check for the returned value
-
-call and delegatecall:  takes an arbitrary number of arguments of any type. These arguments are padded to 32 bytes and concatenated. The modifiers gas and value allow to specify a gaz number and send some ether with the transaction
-
-delegatecall : same as called except that only the code of the given address is used, all other aspects (storage, balance, …) are taken from the current contract. The purpose of delegatecall is to use library code which is stored in another contract. 
-
-
-
-## Variables : bool
-
-**bool** : The possible values are constants **true** and **false**.
-
-<!-- .element style="margin-top:50px"-->
-**Operators** :
-
-! (logical negation)
-&& (logical conjunction, “and”)
-|| (logical disjunction, “or”)
-== (equality)
-!= (inequality)
-
-
-
-## About fixed point number
-Fixed point numbers are not fully supported by Solidity yet. They can be declared, but cannot be assigned to or from.
-
-
-
-## Variables : Fixed-size byte arrays
-
-**bytes1**, **bytes2**, **bytes3**, …, **bytes32**. **byte** is an alias for **bytes1**.
-
-**Operators** :
-
-Comparisons: <=, <, ==, !=, >=, > (evaluate to bool)
-Bit operators: &, |, ^ (bitwise exclusive or), ~ (bitwise negation), << (left shift), >> (right shift)
-Index access: If x is of type bytesI, then x[k] for 0 <= k < I returns the k th byte (read-only).
-The shifting operator works with any integer type as right operand (but will return the type of the left operand), which denotes the number of bits to shift by. Shifting by a negative amount will cause a runtime exception.
-
-**Members** :
-
-.length yields the fixed length of the byte array (read-only).
-
-
-
-## Variables : Dynamically-sized byte array
-**bytes** : Dynamically-sized byte array, see Arrays. Not a value-type!
-**string** : Dynamically-sized UTF-8-encoded string, see Arrays. Not a value-type!
-
-
-Notes: As a rule of thumb, use bytes for arbitrary-length raw byte data and string for arbitrary-length string (UTF-8) data. If you can limit the length to a certain number of bytes, always use one of bytes1 to bytes32 because they are much cheaper.
 
 
 
@@ -317,7 +285,6 @@ Functions can be assigned to variables and pass to other function, like in Javac
 
 Lambda or inline functions are planned but not yet supported.
 
-
 Notes :
 internal/external : 
 Internal functions can only be called inside the current contract (more specifically, inside the current code unit, which also includes internal library functions and inherited functions) because they cannot be executed outside of the context of the current contract. Calling an internal function is realized by jumping to its entry label, just like when calling a function of the current contract internally.
@@ -325,6 +292,17 @@ Internal functions can only be called inside the current contract (more specific
 External functions consist of an address and a function signature and they can be passed via and returned from external function calls.
 
 Functions are internal by default.
+
+
+
+## Method visibility 
+
+- **public** - all can access
+- **external** - Cannot be accessed internally, only externally
+- **internal** - only this contract and contracts deriving from it can access
+- **private** - can be accessed only from this contract
+
+Notes : if your method is only called externally, use external every time, as it costs less gaz (the method parameters aren't copied in memory).
 
 
 
@@ -336,5 +314,78 @@ Functions are internal by default.
 
 
 
+## For
+
+
+
+## Remix IDE
+
+The best option to quickly test Solidity :
+
+Online editor : https://remix.ethereum.org/
+
+Can also be installed locally.
+
+
+
+## Remix IDE - Solidity Editor
+<figure> 
+    <img src="ressources/remix_editor.png" alt="remix editor" height="300px"/>
+</figure>
+
+Allow you to easily : 
+
+- write and compile a smart contract
+
+- test it using solidity test cases
+
+- deploy it on a ethereum network
+
+- debug it
+
+
+
+## Remix IDE - Demo
+
+<!-- .element style="margin-top:150px"-->
+<figure> 
+    <img src="ressources/demo.png" alt="demo" height="300px"/>
+</figure>
+
+Notes : 
+Here’s the list of some important features:
+
+Solidity editor : 
+It display opened files as tabs.
+Remix saves the current file continuously (5s after the last changes)
++/- on the top left corner enable you to increase/decrease the font size of the editor
+
+Smart contract compilation : 
+Compilation Warning and Error are displayed in the gutter
+Autocompile every 5 seconds
+Publishing your contract to Swarm (decentralized file system)
+
+Javascript VM : 
+RemixIDE can simulate an Ethereum network thought a Javascript VM
+
+
+
+## Our common goal during this training
+
+A D-App allowing users to gamble on football matchs in a decentralized fashion.
+
+
+
+## The result
+<!-- .element style="margin-top:150px"-->
+<figure> 
+    <img src="ressources/demo.png" alt="demo" height="300px"/>
+</figure>
+
+
+
+# TP - First smart contract on Remix IDE
+
+<!-- .slide: class="page-tp2" -->
 
 
