@@ -57,12 +57,6 @@ Don't manage network artifacts ever again. Let Truffle do it for you, and put yo
 
 
 
-# TP : Our smart contract on Truffle
-
-<!-- .slide: class="page-tp3" -->
-
-
-
 # Networks
 
 Once your smart contract has been written, you must deploy it on a network.
@@ -115,8 +109,8 @@ Quickly create a test blockchain, with some account already initialized and alim
 
 
 
-# TP 4 : Deploying our smart contract
-<!-- .slide: class="page-tp4" -->
+# TP 3 : Deploying our smart contract
+<!-- .slide: class="page-tp3" -->
 
 
 
