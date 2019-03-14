@@ -27,6 +27,13 @@
     <img src="ressources/solidity-logo.svg" alt="solidity logo" height="270px"/>
 </figure>
 
+<!-- .element style="margin-top:50px"-->
+Historically Ethereum supports several language to write smart contract : **Serpent** (Python-like), **LLL** (Lisp-like), **Mutan** (Go-based), **Viper** (a strongly-typed Python-derived language) and **Solidity** (Javascript-like). 
+
+**Solidity** is the incontested leader so far, as all the others got deprecated expect Viper, which is still under development.
+
+All those languages are compiled down to produce the same **EVM bytecode**.
+
 Notes :
 From solidity doc :
 Solidity is a contract-oriented, high-level language for implementing smart contracts. It was influenced by C++, Python and JavaScript and is designed to target the Ethereum Virtual Machine (EVM).
@@ -35,25 +42,45 @@ Solidity is statically typed, supports inheritance, libraries and complex user-d
 
 
 
-## Pragma
+## Contract definition
 
-Specify the solidity language version
+The pragma is the first line of any smart contract written in solidity.
+
+It specifies the solidity language version.
 
 ```Javascript
 pragma solidity ^0.5.4;
-```
 
-Last version is ^0.5.4
-
-
-
-## Contract definition
-
-```Javascript
 contract HelloWorld {
 
 }
 ```
+
+
+
+## Constructor
+Contract can be initialised with defaut paramaters. Therefore, a constructor can be defined. 
+
+```Javascript
+
+pragma solidity ^0.5.4;
+
+contract HelloWorld {
+    address owner;
+    uint contractId;
+
+    constructor(uint _contractId) public payable{
+        owner = msg.sender;
+        contractId = _contractId;
+    }
+}
+```
+
+
+## Value types
+
+The following types are also called value types because variables of these types will always be passed by value, i.e. they are always copied when they are used as function arguments or in assignments.
+
 
 
 ## Variables : integer
@@ -61,6 +88,8 @@ contract HelloWorld {
 ```Javascript
 contract HelloWorld {
     uint anUnsignedInteger = 400;
+    int anSignedInteger = 8;
+    int constant aConstant = 10;
 }
 ```
 
@@ -125,6 +154,10 @@ delegatecall : same as called except that only the code of the given address is 
 
 **bool** : The possible values are constants **true** and **false**.
 
+```Javascript
+    bool mybool = true;
+```
+
 <!-- .element style="margin-top:50px"-->
 **Operators** :
 
@@ -140,9 +173,9 @@ delegatecall : same as called except that only the code of the given address is 
 
 Fixed point numbers are not fully supported by Solidity yet. They can be declared, but cannot be assigned to or from.
 
-**fixed<M>x<N>**: signed fixed-point decimal number of M bits, 8 <= M <= 256, M % 8 ==0, and 0 < N <= 80
+**fixed&lt;M&gt;&lt;N&gt;**: signed fixed-point decimal number of M bits, 8 <= M <= 256, M % 8 ==0, and 0 < N <= 80
 
-**ufixed<M>x<N>**: unsigned variant of fixed<M>x<N>.
+**ufixed&lt;M&gt;&lt;N&gt;**: unsigned variant of fixed<M>x<N>.
 
 **fixed, ufixed**: synonyms for fixed128x18, ufixed128x18 respectively.
 
@@ -159,7 +192,6 @@ Fixed point numbers are not fully supported by Solidity yet. They can be declare
 - Bit operators: &, |, ^ (bitwise exclusive or), ~ (bitwise negation), << (left shift), >> (right shift)
 - Index access: x[k] for 0 <= k < I returns the k th byte (read-only).
 
-
 <!-- .element style="margin-top:50px"-->
 **Members** :
 
@@ -168,11 +200,23 @@ Fixed point numbers are not fully supported by Solidity yet. They can be declare
 
 
 ## Variables : Dynamically-sized byte array
+
 **bytes** : Dynamically-sized byte array, see Arrays. Not a value-type!
-**string** : Dynamically-sized UTF-8-encoded string, see Arrays. Not a value-type!
 
+```Javascript
+    byte a; // equivalent to bytes1
+    bytes2 b;
+    bytes32 c;
+```
 
-Notes: As a rule of thumb, use bytes for arbitrary-length raw byte data and string for arbitrary-length string (UTF-8) data. If you can limit the length to a certain number of bytes, always use one of bytes1 to bytes32 because they are much cheaper.
+<!-- .element style="margin-top:50px"-->
+**string** : Dynamically-sized UTF-8-encoded string. Does not allow lenght or access by index for now. Not a value-type!
+
+```Javascript
+string n = "hello"; 
+```
+
+Notes : As a rule of thumb, use bytes for arbitrary-length raw byte data and string for arbitrary-length string (UTF-8) data. If you can limit the length to a certain number of bytes, always use one of bytes1 to bytes32 because they are much cheaper.
 
 
 
@@ -193,13 +237,50 @@ contract C {
 
 ## Structs
 
+Structs are custom defined types that can group several variables.
+
+```Javascript
+contract Ballot {
+    struct Voter {
+        uint weight; // weight is accumulated by delegation
+        bool voted;  // if true, that person already voted
+        address delegate; // person delegated to
+        uint vote;   // index of the voted proposal
+    }
+}
+```
+
 
 
 ## Mapping
 
+A mapping is a data structure close to a hash table (hash map) : a data structure that implements an associative array abstract data type, a structure that can map keys to values.
+
+The structure is as follow : 
+```Javascript
+mapping(_KeyType => _ValueType) myMapping;
+```
+
+ - **_KeyType** can be any elementary type. This means it can be any of the built-in value types plus bytes and string. User-defined or complex types like contract types, enums, mappings, structs and any array type apart from bytes and string are not allowed. 
+ 
+ - **_ValueType** can be any type, including mappings.
+
+Notes :
+ The similarity ends there, the key data is not stored in a mapping, only its keccak256 hash is used to look up the value. Because of this, mappings do not have a length or a concept of a key or value being set.
+
+Mappings can only have a data location of storage and thus are allowed for state variables, as storage reference types in functions, or as parameters for library functions. They cannot be used as parameters or return parameters of contract functions that are publicly visible.
+
 
 
 ## State variables visibility
+
+Variables can have a visibility.
+
+```Javascript
+mapping (string => uint) public balances;
+State private state;
+address internal owner;
+```
 
 - **public** : can be accessed by everyone. Solidity automatically generates a getter for a public variable.
 - **internal**  (default): can only be accessed internally and only from the contract itself.
@@ -208,6 +289,8 @@ contract C {
 
 
 ## Enums 
+
+Enums are a simple user-defined type.
 
 ```Javascript
 contract test {
@@ -220,6 +303,11 @@ contract test {
     }
 }
 ```
+
+Enums can be casted to uint :
+```Javascript
+uint GoLeftAction = uint(ActionChoices.GoLeft); 
+``` 
 
 
 
@@ -269,18 +357,6 @@ Example :
 ```
 
 
-## Constructor
-```Javascript
-   constructor(
-        uint _biddingTime,
-        address _beneficiary
-    ) public {
-        beneficiary = _beneficiary;
-        auctionEnd = now + _biddingTime;
-    }
-```
-
-
 
 ## Function
 
@@ -313,15 +389,38 @@ Notes : if your method is only called externally, use external every time, as it
 
 
 
-## Inherance
+## Control flow
+
+There is: **if**, **else**, **while**, **do**, **for**, **break**, **continue**, **return**, with the usual semantics known from C or JavaScript.
+
+```Javascript
+if (myBool) {
+    return 0;
+} else {
+    return 1;
+}
+
+for (uint i=0; i<10; i++) {
+  // do something
+}
+
+```
 
 
 
-## If
+## Self destruct
 
+If your smart contract is buggy and you want to make it unusable (or if you want to exit scam), you can call the **selfdestruct(addressToSendFundsTo)**. 
 
+```Javascript
+function kill() {
+    if (owner == msg.sender) { // We check who is calling
+        selfdestruct(owner); //Destruct the contract
+    }
+}
+```
 
-## For
+This function will make the contract unreachable and will send all the contract funds to the specified address.
 
 
 

@@ -641,6 +641,25 @@ Ethereum Virtual Machines have been implemented in C++, Go, Haskell, Java, JavaS
 
 ## Mist
 
+Mist was supposed to be a browser of D-app.
+
+<!-- .element style="margin-top:50px"-->
+It provides a **wallet** fonctionnality.
+
+<!-- .element style="margin-top:50px"-->
+As well as a **D-app browser**, where Mist is providing an **ethereum bridge** to the website of the browsed D-app.
+
+<!-- .element style="margin-top:50px"-->
+After a while thought Metamask prevailed as a browser extension and you can't browse every D-app with Mist.
+
+
+
+## Mist example
+
+<figure> 
+    <img src="ressources/mist.PNG" alt="mist" height="550px"/>
+</figure>
+
 
 
 ## Geth
