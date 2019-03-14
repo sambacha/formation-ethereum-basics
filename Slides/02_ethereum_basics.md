@@ -645,9 +645,29 @@ Ethereum Virtual Machines have been implemented in C++, Go, Haskell, Java, JavaS
 
 ## Geth
 
+Open sourced project, **Golang** implementation of the Ethereum protocol.
+
+This is generally seen as the reference Ethereum implementation.
+
 
 
 ## Parity
+
+<figure> 
+    <img src="ressources/parity_logo.png_large" alt="parity logo" height="200px"/>
+</figure>
+
+Open-sourced project, **Rust** implementation of the Ethereum protocol.
+
+Advantages :
+
+- much more advanced pruning capabilities 
+- Browser-based GUI.
+- Passive mode to reduce CPU and network load on leaf nodes.
+- Allows you to sync from scratch in hours as opposed to days.
+
+Notes : 
+With the pruning algorithm, hard drive usage won't grow exponentially. (On the short term this means you won't be adding 20+ Gigs every week to your chaindata folder.)
 
 
 

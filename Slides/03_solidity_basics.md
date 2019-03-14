@@ -137,7 +137,14 @@ delegatecall : same as called except that only the code of the given address is 
 
 
 ## About fixed point number
+
 Fixed point numbers are not fully supported by Solidity yet. They can be declared, but cannot be assigned to or from.
+
+**fixed<M>x<N>**: signed fixed-point decimal number of M bits, 8 <= M <= 256, M % 8 ==0, and 0 < N <= 80
+
+**ufixed<M>x<N>**: unsigned variant of fixed<M>x<N>.
+
+**fixed, ufixed**: synonyms for fixed128x18, ufixed128x18 respectively.
 
 
 

@@ -73,6 +73,33 @@ Once your smart contract has been written, you must deploy it on a network.
 
 A smart contracts must to be compiled to byte code before it can be deployed on the network. 
 
+## Ethereum mainnet
+
+
+
+## Ethereum testnets
+
+<!-- .element style="margin-top:50px"-->
+*Ropsten:* 
+- Official ethereum testnet with proof-of-work
+- Ether can be mined
+- Pros :Support both Geth and parity
+- Cons : sensible to DOS attack
+
+<!-- .element style="margin-top:50px"-->
+*Kovan:*
+- A proof-of-authority blockchain, started by the Parity team. 
+- Ether can’t be mined, it has to be requested though a faucet
+- Pros : Not sensible to DOS attack
+- Cons : only support parity nodes
+
+<!-- .element style="margin-top:50px"-->
+*Rinkeby:* 
+- A proof-of-authority blockchain, started by the Geth team. 
+- Ether can’t be mined; it has to be requested though a faucet
+- Pros : Not sensible to DOS attack
+- Cons : only support geth nodes, getting fake ether require to post on social networks
+
 
 
 ##  ABI (Application Binary Interface)
