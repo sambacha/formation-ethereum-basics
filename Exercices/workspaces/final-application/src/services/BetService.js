@@ -50,17 +50,6 @@ class BetService {
     return '0xddA3B5c975c2C4fb2bf03d086aD5834732eaFb17'
   }
 
-  bet(matchId, betOnHomeTeamWin, betOnHomeTeamEquality, amountToBet) {
-    this.state.ContractInstance.betOnMatch(
-      betOnHomeTeamWin, betOnHomeTeamEquality, matchId, {
-        gas: 300000,
-        from: this.getCurrentEthereumAccountPubKey(),
-        value: window.web3.toWei(amountToBet, 'ether'),
-      }, (err, result) => {
-        console.log(err, result)
-      },
-    )
-  }
 
   resolveMatch(matchId, hasHomeTeamWon, wasThereEquality) {
     this.state.ContractInstance.resolveMatch(
@@ -71,6 +60,16 @@ class BetService {
         console.log(err, result)
       },
     )
+  }
+
+  createMatch(homeTeam, challengerTeam, libelle, date, quotation) {
+    this.state.ContractInstance
+      .createMatch(homeTeam, challengerTeam, libelle, date, Math.floor(quotation * 100), {
+        gas: 1000000,
+        from: this.getCurrentEthereumAccountPubKey(),
+      }, (err, result) => {
+        console.log(err, result)
+      })
   }
 
   getBalance(account) {
@@ -87,16 +86,6 @@ class BetService {
 
   getCurrentEthereumAccountPubKey() {
     return this.web3.eth.accounts[0]
-  }
-
-  createMatch(homeTeam, challengerTeam, libelle, date, quotation) {
-    this.state.ContractInstance
-      .createMatch(homeTeam, challengerTeam, libelle, date, Math.floor(quotation * 100), {
-        gas: 1000000,
-        from: this.getCurrentEthereumAccountPubKey(),
-      }, (err, result) => {
-        console.log(err, result)
-      })
   }
 
   getBets() {
@@ -122,6 +111,18 @@ class BetService {
           })
       })
     })
+  }
+
+  bet(matchId, betOnHomeTeamWin, betOnHomeTeamEquality, amountToBet) {
+    this.state.ContractInstance.betOnMatch(
+      betOnHomeTeamWin, betOnHomeTeamEquality, matchId, {
+        gas: 300000,
+        from: this.getCurrentEthereumAccountPubKey(),
+        value: window.web3.toWei(amountToBet, 'ether'),
+      }, (err, result) => {
+        console.log(err, result)
+      },
+    )
   }
 
   /* eslint-disable */
@@ -162,7 +163,7 @@ class BetService {
         }
       })
     })
-  }e
+  }
 
   startWatchingEvents() {
     this.state.eventsFilter = this.state.ContractInstance.allEvents({ fromBlock: 0, toBlock: 'latest' })

@@ -3,7 +3,6 @@ import range from 'lodash/range'
 import { Subject } from 'rxjs'
 import betContract from '../contracts/Betting.json'
 
-
 class BetService {
   constructor() {
     this.state = {
@@ -26,6 +25,7 @@ class BetService {
 
     this.eventSubject = new Subject()
 
+    // Added for TP 05 
     if (typeof window.web3 !== 'undefined') {
       console.log('Using web3 detected from external source like Metamask')
       this.web3 = new Web3(window.web3.currentProvider) // eslint-disable-line no-undef
@@ -39,6 +39,7 @@ class BetService {
     // ln -s ../build truffle-build
     this.state.MyContract = window.web3.eth.contract(betAbi)
     this.state.ContractInstance = this.state.MyContract.at(BetService.getBetContractPubKey())
+
   }
 
   static printEvent(event) {
@@ -47,21 +48,10 @@ class BetService {
   }
 
   static getBetContractPubKey() {
-    return '0xddA3B5c975c2C4fb2bf03d086aD5834732eaFb17'
+    return '<ContractPublicKey>'
   }
 
-  bet(matchId, betOnHomeTeamWin, betOnHomeTeamEquality, amountToBet) {
-    this.state.ContractInstance.betOnMatch(
-      betOnHomeTeamWin, betOnHomeTeamEquality, matchId, {
-        gas: 300000,
-        from: this.getCurrentEthereumAccountPubKey(),
-        value: window.web3.toWei(amountToBet, 'ether'),
-      }, (err, result) => {
-        console.log(err, result)
-      },
-    )
-  }
-
+  // Added for TP 05 
   resolveMatch(matchId, hasHomeTeamWon, wasThereEquality) {
     this.state.ContractInstance.resolveMatch(
       matchId, hasHomeTeamWon, wasThereEquality, {
@@ -71,6 +61,17 @@ class BetService {
         console.log(err, result)
       },
     )
+  }
+
+  // Added for TP 05 
+  createMatch(homeTeam, challengerTeam, libelle, date, quotation) {
+    this.state.ContractInstance
+      .createMatch(homeTeam, challengerTeam, libelle, date, Math.floor(quotation * 100), {
+        gas: 1000000,
+        from: this.getCurrentEthereumAccountPubKey(),
+      }, (err, result) => {
+        console.log(err, result)
+      })
   }
 
   getBalance(account) {
@@ -87,16 +88,6 @@ class BetService {
 
   getCurrentEthereumAccountPubKey() {
     return this.web3.eth.accounts[0]
-  }
-
-  createMatch(homeTeam, challengerTeam, libelle, date, quotation) {
-    this.state.ContractInstance
-      .createMatch(homeTeam, challengerTeam, libelle, date, Math.floor(quotation * 100), {
-        gas: 1000000,
-        from: this.getCurrentEthereumAccountPubKey(),
-      }, (err, result) => {
-        console.log(err, result)
-      })
   }
 
   getBets() {
@@ -124,6 +115,41 @@ class BetService {
     })
   }
 
+  startWatchingEvents() {
+    this.state.eventsFilter = this.state.ContractInstance.allEvents({ fromBlock: 0, toBlock: 'latest' })
+    this.state.eventsFilter.watch((error, result) => {
+      this.eventSubject.next(BetService.printEvent(result))
+    })
+    this.state.betTreatmentFilter = this.state.ContractInstance.ResolvedBet({}, { fromBlock: 0, toBlock: 'latest' },
+      (error, result) => {
+        if (!error) {
+          this.eventSubject.next(BetService.printEvent(result))
+        } else {
+          console.log(error)
+        }
+      })
+  }
+
+  stopWatchingEvents() {
+    // will stop and uninstall the filter
+    this.state.eventsFilter.stopWatching()
+    this.state.betTreatmentFilter.stopWatching()
+  }
+
+  // Added for TP 06
+  bet(matchId, betOnHomeTeamWin, betOnHomeTeamEquality, amountToBet) {
+    this.state.ContractInstance.betOnMatch(
+      betOnHomeTeamWin, betOnHomeTeamEquality, matchId, {
+        gas: 300000,
+        from: this.getCurrentEthereumAccountPubKey(),
+        value: window.web3.toWei(amountToBet, 'ether'),
+      }, (err, result) => {
+        console.log(err, result)
+      },
+    )
+  }
+
+  // Added for TP 06
   /* eslint-disable */
   getMatchesToBetOn() {
     return new Promise((resolve, reject) => {
@@ -162,27 +188,6 @@ class BetService {
         }
       })
     })
-  }e
-
-  startWatchingEvents() {
-    this.state.eventsFilter = this.state.ContractInstance.allEvents({ fromBlock: 0, toBlock: 'latest' })
-    this.state.eventsFilter.watch((error, result) => {
-      this.eventSubject.next(BetService.printEvent(result))
-    })
-    this.state.betTreatmentFilter = this.state.ContractInstance.ResolvedBet({}, { fromBlock: 0, toBlock: 'latest' },
-      (error, result) => {
-        if (!error) {
-          this.eventSubject.next(BetService.printEvent(result))
-        } else {
-          console.log(error)
-        }
-      })
-  }
-
-  stopWatchingEvents() {
-    // will stop and uninstall the filter
-    this.state.eventsFilter.stopWatching()
-    this.state.betTreatmentFilter.stopWatching()
   }
 }
 
