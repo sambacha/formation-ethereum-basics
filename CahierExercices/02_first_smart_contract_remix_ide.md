@@ -52,4 +52,4 @@ struct Match {
 - Une fois le smart contract écris, cliquez sur `Deploy` et confirmer la transaction pour déployer votre smart contract.
 - Dans la partie `Deployed Contracts` vous pouvez voir les fonctions external / view et les attributs du contrat.
 - Créez un match, acceptez la transaction et regardez ce qu'il se passe dans la console.
-- Faites appel à la vue `getMatchLength`, un `call` apparait alors dans la console avec la valeur de retour de la vue.
+- Faites appel à la vue `getMatchCount`, un `call` apparait alors dans la console avec la valeur de retour de la vue.
