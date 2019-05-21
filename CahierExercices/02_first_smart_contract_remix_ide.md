@@ -11,6 +11,22 @@
 
 ### Ecriture du smart contract dans Remix IDE
 
+- Créer un premier smart contract avec un constructeur :
+
+```
+pragma solidity >=0.5.0 <0.7.0;
+pragma experimental ABIEncoderV2;
+
+contract Betting{
+    address public owner;
+
+    constructor() public payable{
+        owner = msg.sender;
+    }
+  
+}
+```
+- Compilez ce smart contract
 - Déclarez une `struct` Match:
 ```
 struct Match {
@@ -26,9 +42,11 @@ struct Match {
 }
 ```
 
-- Déclarez un tableau de Match
-- Créez une fonction `external` qui permet de créer un match, de l'ajouter à notre tableau de Match et d'emmetre un évenement quand le match est créé. Faites en sorte de générer un id qui est incrémenté à la création de chaque match.
-- Créez une fonction `view` qui permet de récupérer la liste des matchs.
+- Déclarez un tableau de Match public
+- Créez un event `matchCreation` qui va afficher les paramètres  `homeTeam`, `externalTeam`, `homeVictory`, `equality`, `libelle` , `date` et `quotation` passés à la fonctionnalité de création de match 
+- Créez cette fonction de création de match qui aura une visibilité `external` et qui va permettre de créer un match, de l'ajouter à notre tableau de Match et d'émettre un évenement `matchCreation` quand le match est créé. 
+- Faites en sorte de générer un id qui est incrémenté à la création de chaque match.
+- Créez une fonction `getMatchCount`de visibilité `view` qui permettra de récupérer le nombre de match créés.
 
 ### Déploiement et interaction avec le smart contract
 - Une fois le smart contract écris, cliquez sur `Deploy` et confirmer la transaction pour déployer votre smart contract.
