@@ -19,6 +19,7 @@
     "deploy": "zenika-formation-deploy"
   },
   "devDependencies": {
-    "grunt-cli": "1.2.0"
+    "grunt-cli": "1.2.0",
+    "truffle": "^5.0.18"
   }
 }
