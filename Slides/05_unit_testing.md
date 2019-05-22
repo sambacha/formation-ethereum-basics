@@ -20,7 +20,7 @@
 - [What's next on Ethereum](#/10)
 
 
-## TP 5 : Unit test with Truffle
+## TP 4 : Unit test with Truffle
 <!-- .slide: class="page-tp5" -->
 
 

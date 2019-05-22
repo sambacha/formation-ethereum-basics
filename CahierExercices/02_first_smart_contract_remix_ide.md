@@ -27,25 +27,8 @@ contract Betting{
 }
 ```
 - Compilez ce smart contract
-- Déclarez une `struct` Match:
-```
-struct Match {
-    uint id;
-    string homeTeam;
-    string externalTeam;
-    bool homeVictory;
-    bool equality;
-    string libelle;
-    uint256 date; 
-    bool settled;
-    uint quotation;
-}
-```
 
-- Déclarez un tableau de Match public
-- Créez un event `matchCreation` qui va afficher les paramètres  `homeTeam`, `externalTeam`, `homeVictory`, `equality`, `libelle` , `date` et `quotation` passés à la fonctionnalité de création de match 
-- Créez cette fonction de création de match qui aura une visibilité `external` et qui va permettre de créer un match, de l'ajouter à notre tableau de Match et d'émettre un évenement `matchCreation` quand le match est créé. 
-- Faites en sorte de générer un id qui est incrémenté à la création de chaque match.
+- Ajouter une fonction createMatch qui va incrémenter un compteur de création de match.
 - Créez une fonction `getMatchCount`de visibilité `view` qui permettra de récupérer le nombre de match créés.
 
 ### Déploiement et interaction avec le smart contract
