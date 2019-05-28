@@ -26,6 +26,7 @@ struct Match {
 - Déclarez un tableau de Match public
 - Créez un event `matchCreation` qui va afficher les paramètres  `homeTeam`, `externalTeam`, `libelle` , `date` et `quotation` passés à la fonctionnalité de création de match 
 - Compléter la fonction de création de match qui aura une visibilité `external` et qui va permettre de créer un match, de l'ajouter à notre tableau de Match et d'émettre un évenement `matchCreation` quand le match est créé. 
+- Utiliser le mot clé `require` afin que seul le propriétaire du smart contract puisse appeler cette fonction.
 
 # Mise en place des tests unitaires
 

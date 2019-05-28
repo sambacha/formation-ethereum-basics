@@ -3,11 +3,6 @@ import range from 'lodash/range'
 import { Subject } from 'rxjs'
 import betContract from '../contracts/Betting.json'
 
-export const MATCH_STATE_UNSETTLED = 0;
-export const MATCH_STATE_SETTLED_ON_HOME_VICTORY = 1;
-export const MATCH_STATE_SETTLED_ON_CHALLENGER_VICTORY = 2;
-export const MATCH_STATE_SETTLED_ON_EQUALITY = 3;
-
 class BetService {
   constructor() {
     this.state = {
@@ -30,16 +25,18 @@ class BetService {
 
     this.eventSubject = new Subject()
 
+    // Added for TP 05 
     if (typeof window.web3 !== 'undefined') {
       console.log('Using web3 detected from external source like Metamask')
       this.web3 = new Web3(window.web3.currentProvider) // eslint-disable-line no-undef
-    }
+    } 
     const betAbi = betContract.abi
     // TODO : ne fonctionne que si on fait un lien symbolique truffle-build
     // dans src vers le répertoire de build de truffle
     // ln -s ../build truffle-build
     this.state.MyContract = window.web3.eth.contract(betAbi)
     this.state.ContractInstance = this.state.MyContract.at(BetService.getBetContractPubKey())
+
   }
 
   static printEvent(event) {
@@ -48,10 +45,10 @@ class BetService {
   }
 
   static getBetContractPubKey() {
-    return '0xddA3B5c975c2C4fb2bf03d086aD5834732eaFb17'
+    return '<ContractPublicKey>'
   }
 
-
+  // Added for TP 05 
   resolveMatch(matchId, hasHomeTeamWon, wasThereEquality) {
     this.state.ContractInstance.resolveMatch(
       matchId, hasHomeTeamWon, wasThereEquality, {
@@ -63,6 +60,7 @@ class BetService {
     )
   }
 
+  // Added for TP 05 
   createMatch(homeTeam, challengerTeam, libelle, date, quotation) {
     this.state.ContractInstance
       .createMatch(homeTeam, challengerTeam, libelle, date, Math.floor(quotation * 100), {
@@ -114,56 +112,6 @@ class BetService {
     })
   }
 
-  bet(matchId, betOnHomeTeamWin, betOnHomeTeamEquality, amountToBet) {
-    this.state.ContractInstance.betOnMatch(
-      betOnHomeTeamWin, betOnHomeTeamEquality, matchId, {
-        gas: 300000,
-        from: this.getCurrentEthereumAccountPubKey(),
-        value: window.web3.toWei(amountToBet, 'ether'),
-      }, (err, result) => {
-        console.log(err, result)
-      },
-    )
-  }
-
-  /* eslint-disable */
-  getMatchesToBetOn() {
-    return new Promise((resolve, reject) => {
-      const matches = []
-      let contractInst = this.state.ContractInstance
-
-      contractInst.matchIDGenerator.call((err, matchsLenght) => {
-
-        if (err) {
-          reject("Erreur récupération lenght", err);
-        }
-
-        let matchCounter = 0;
-        
-        for (let i = 0; i < matchsLenght; i++) {
-          contractInst.matchs.call(i, (err, match) => {
-            if (err) {
-              reject("Erreur récupération match", err);
-            }
-
-            matches.push({ 
-              id: match[0].toNumber(), 
-              homeTeam: match[1], 
-              externalTeam: match[2], 
-              matchState: match[3], 
-              libelle: match[4],
-              date: match[5].toNumber(),
-              quotation: match[6].toNumber()
-             });
-            if (++matchCounter == matchsLenght) {
-              resolve(matches);
-            }
-          });
-        }
-      })
-    })
-  }
-
   startWatchingEvents() {
     this.state.eventsFilter = this.state.ContractInstance.allEvents({ fromBlock: 0, toBlock: 'latest' })
     this.state.eventsFilter.watch((error, result) => {
@@ -183,6 +131,60 @@ class BetService {
     // will stop and uninstall the filter
     this.state.eventsFilter.stopWatching()
     this.state.betTreatmentFilter.stopWatching()
+  }
+
+  // Added for TP 06
+  bet(matchId, betOnHomeTeamWin, betOnHomeTeamEquality, amountToBet) {
+    this.state.ContractInstance.betOnMatch(
+      betOnHomeTeamWin, betOnHomeTeamEquality, matchId, {
+        gas: 300000,
+        from: this.getCurrentEthereumAccountPubKey(),
+        value: window.web3.toWei(amountToBet, 'ether'),
+      }, (err, result) => {
+        console.log(err, result)
+      },
+    )
+  }
+
+  // Added for TP 06
+  /* eslint-disable */
+  getMatchesToBetOn() {
+    return new Promise((resolve, reject) => {
+      const matches = []
+      let contractInst = this.state.ContractInstance
+
+      this.state.ContractInstance.getMatchsLenght.call((err, matchsLenght) => {
+
+        if (err) {
+          reject("Erreur récupération lenght", err);
+        }
+
+        let matchCounter = 0;
+        
+        for (let i = 0; i < matchsLenght; i++) {
+          contractInst.matchs.call(i, (err, match) => {
+            if (err) {
+              reject("Erreur récupération match", err);
+            }
+
+            matches.push({ 
+              id: match[0].toNumber(), 
+              homeTeam: match[1], 
+              externalTeam: match[2], 
+              settledOnHomeVictory: match[3], 
+              settledOnEquality: match[4], 
+              libelle: match[5],
+              date: match[6].toNumber(),
+              settled: match[7],
+              quotation: match[8].toNumber()
+             });
+            if (++matchCounter == matchsLenght) {
+              resolve(matches);
+            }
+          });
+        }
+      })
+    })
   }
 }
 
