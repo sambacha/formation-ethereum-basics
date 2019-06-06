@@ -16,12 +16,10 @@ contract('Betting', async (accounts) => {
     assert.equal(match[0].toNumber(), 1, "l'id du match est incorrect");
     assert.equal(match[1], "homeTeam", "La home team n'est pas correcte");
     assert.equal(match[2], "challengerTeam", "La home des challengers n'est pas correcte");
-    assert.equal(match[3], true, "Le match ne doit pas être terminé - victoire homeTeam");
-    assert.equal(match[4], true, "Le match ne doit pas être terminé - égalité");
-    assert.equal(match[5], "libelle", "Le libelle du match n'est pas correct.");
-    assert.equal(match[6].toNumber(), 10, "La date n'est pas correcte");
-    assert.equal(match[7], false, "Le match ne doit pas être terminé");
-    assert.equal(match[8].toNumber(), 100, "La cote n'est pas correcte");
+    assert.equal(match[3].toNumber(), 0, "Le match doit être dans l'état UNSETTLED");
+    assert.equal(match[4], "libelle", "Le libelle du match n'est pas correct.");
+    assert.equal(match[5].toNumber(), 10, "La date n'est pas correcte");
+    assert.equal(match[6].toNumber(), 100, "La cote n'est pas correcte");
 
   });
 
@@ -84,10 +82,7 @@ contract('Betting', async (accounts) => {
 
     let match = await betting.matchs.call(0);
 
-    assert.equal(match[3], false, "Le match doit être terminé sur victoire challenger - victoire homeTeam");
-    assert.equal(match[4], false, "Le match doit être terminé sur victoire challenger- égalité");
-    assert.equal(match[7], true, "Le match doit être terminé");
-    
+    assert.equal(match[3].toNumber(), 2, "Le match doit être terminé sur une victoire challenger");
     let newMainAccountBalance = await web3.eth.getBalance(accounts[0]);
     expect(new BigNumber(newMainAccountBalance).lessThan(initialMainAccountBalance), "Le premier parieur a perdu son pari").to.equal(true);
     

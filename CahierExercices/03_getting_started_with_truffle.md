@@ -1,5 +1,12 @@
 # TP 3 : Initialiser un projet Truffle et créer un premier smart contract
 
+## Mise en place d'un environnement de développement
+
+- Installer votre IDE préféré, nous avons personnellement une préférence pour Visual Studio Code avec les extensions Docker, ESLint, Solidity, Solidity Extended et Solidity-solhint installées.
+
+See : https://code.visualstudio.com/docs/editor/extension-gallery
+
+- Installer la dernière version de npm
 
 ## Mise en place de Truffle
 - Installer truffle `npm install --save-dev truffle`

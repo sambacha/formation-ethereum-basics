@@ -35,13 +35,21 @@ class Bets extends Component {
       return 'Challenger victory'
     }
 
+    const renderMatchLabel = ({match_id}) => {
+      const match = this.props.matchs.find((match) => match.id == match_id)
+      if(!match){
+        return ""
+      }
+      return "" + match.homeTeam + " - " + match.externalTeam
+    } 
+
     return (
       <div id="my-bets">
         <h2>My Bets</h2>
         <ul>
           {this.state.bets.map(bet => (
             <li key={bet.match_id}>
-              {`${bet.amount} ether ${renderPrediction(bet)} (${bet.homeTeam} - ${bet.externalTeam})`}
+              {`${bet.amount} ether ${renderPrediction(bet)} (${renderMatchLabel(bet)})`}
             </li>
           ))}
         </ul>

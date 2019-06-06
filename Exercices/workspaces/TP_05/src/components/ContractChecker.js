@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BetService from '../services/BetService'
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 class ContractChecker extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class ContractChecker extends Component {
     this.getCurrentUserPublicKey = this.getCurrentUserPublicKey.bind(this)
     this.betService = new BetService()
   }
-
+  
   componentDidMount() {
     this.setState({
       contractAccountInterval: setInterval(this.getContractAccountBalance, 5000),
@@ -18,75 +19,87 @@ class ContractChecker extends Component {
       currentUserPublicKeyInterval: setInterval(this.getCurrentUserPublicKey, 5000),
     })
   }
-
+  
   componentWillUnmount() {
     const {
       contractAccountInterval,
       currentUserBalanceInterval,
       currentUserPublicKeyInterval,
     } = this.state
-
+    
     clearInterval(contractAccountInterval)
     clearInterval(currentUserBalanceInterval)
     clearInterval(currentUserPublicKeyInterval)
   }
-
-
-  getCurrentUserPublicKey() {
-    this.setState({
-      currentUserPublicKey: this.betService.getCurrentEthereumAccountPubKey(),
-    })
-  }
-
-  getCurrentUserBalance() {
-    this.betService.getBalance(this.betService.getCurrentEthereumAccountPubKey()).then((result) => {
+  
+  
+  async getCurrentUserPublicKey() {
+    try {
       this.setState({
-        currentUserBalance: result,
+        currentUserPublicKey: await this.betService.getCurrentEthereumAccountPubKey()
       })
-    })
+    } catch(err){
+      console.error(err)
+    }
   }
 
-  getContractAccountBalance() {
-    this.betService.getBalance(BetService.getBetContractPubKey()).then((result) => {
-      this.setState({
-        contractBalance: result,
-      })
-    })
+  balanceCallback(stateParam) {
+    return  (error, result) => { 
+      if (error) {
+        console.error(error)
+      } else {
+        this.setState({
+          [stateParam]: this.betService.fromWei(result.toNumber())
+        })
+      }
+    }
+  } 
+  
+  async getCurrentUserBalance() {
+    
+    const account = await this.betService.getCurrentEthereumAccountPubKey()
+    
+    this.betService.getBalance(account, this.balanceCallback('currentUserBalance')) 
   }
-
+  
+  async getContractAccountBalance() {
+    this.betService.getBalance(this.betService.getBetContractPubKey(), this.balanceCallback('contractBalance'))
+  }
+  
   render() {
     const { currentUserPublicKey, currentUserBalance, contractBalance } = this.state
     return (
       <div id="accounts-sumup">
-        <div>
-          <h2>My account</h2>
-          <p>
-            <strong>Public key :</strong>
-            {' '}
-            {currentUserPublicKey}
-          </p>
-          <p>
-            <strong>Balance :</strong>
-            {' '}
-            {currentUserBalance}
-          </p>
-        </div>
-        <div>
-          <h2>Bet contract</h2>
-          <p>
-            <strong>Public key :</strong>
-            {' '}
-            {BetService.getBetContractPubKey()}
-          </p>
-          <p>
-            <strong>Balance :</strong>
-            {' '}
-            {contractBalance}
-          </p>
-        </div>
+      <div>
+      <h2>My account</h2>
+      <p>
+      <strong>Public key :</strong>
+      {' '}
+      {currentUserPublicKey}
+      </p>
+      <p>
+      <strong>Balance :</strong>
+      {' '}
+      {currentUserBalance}
+      </p>
       </div>
-    )
+      <div>
+      <h2>Bet contract</h2>
+      <p>
+      <strong>Public key :</strong>
+      {' '}
+      {this.betService.getBetContractPubKey()}
+      </p>
+      <p>
+      <strong>Balance :</strong>
+      {' '}
+      {contractBalance}
+      </p>
+      </div>
+      </div>
+      )
+    }
   }
-}
-
-export default ContractChecker
+  
+  export default ContractChecker
+  

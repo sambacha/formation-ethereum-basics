@@ -33,7 +33,7 @@ contract Betting{
         matchs.push(Match(matchIDGenerator, _homeTeam, _externalTeam, MatchState.UNSETTLED, _label, _date, _quotation));
     }
     
-    event ResolvedMatch(uint match_id, uint matchState);
+    event MatchResolution(uint match_id, uint matchState);
     event debugResolvedMatch(uint match_id, bool homeVictory, bool equality, uint matchState);
     function resolveMatch(uint _match_id, bool _homeVictory, bool _equality) external {   
         Match storage currentMatch = matchs[_match_id-1];
@@ -46,6 +46,6 @@ contract Betting{
         } else {
             currentMatch.matchState = MatchState.CHALLENGER_VICTORY;
         }
-        emit ResolvedMatch(_match_id, uint(currentMatch.matchState));
+        emit MatchResolution(_match_id, uint(currentMatch.matchState));
     }   
 }

@@ -3,6 +3,7 @@
 ### Metamask
 - Installez l'extension MetaMask et connectez vous à votre blockchain local depuis MetaMask.
 - Importez un compte avec des ether.
+- IMPORTANT (sinon vous ne pourrez pas récupérer les données de la blockchain dans votre application) Sous Paramètres -> Privacy & Security -> désactivez la checkbox 'Les sites Web doivent demander l'accès pour afficher les informations de votre compte'.
 
 ### Remix IDE
 - Rendez vous sur https://remix.ethereum.org/
