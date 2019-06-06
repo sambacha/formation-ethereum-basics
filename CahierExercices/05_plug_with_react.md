@@ -16,7 +16,7 @@ Nota-bene : Si vous ne connaissez pas React, pas de panique ! Toutes les modific
 - Dans Ganache, récupérez l'adresse publique de votre contrat et renvoyez la dans la fonction `getBetContractPubKey`
    
 ## Premières interrogations de la blockchain
-- DAns BetService.js, modifiez la méthode `getCurrentEthereumAccountPubKey()` et utilisez l'object Web3 ainsi instancié pour récupérez la clé publique du wallet sélectionné par Metamask. Indice, cette clé publique est récupérable à l'index O du tableau `eth.accounts`.
+- Dans BetService.js, modifiez la méthode `getCurrentEthereumAccountPubKey()` et utilisez l'object Web3 ainsi instancié pour récupérez la clé publique du wallet sélectionné par Metamask. Indice, cette clé publique est récupérable à l'index O du tableau `eth.accounts`.
 - Vérifier que cette information s'affiche bien dans le front-end My account -> Public Key
 - Nous allons maintenant récupérer le montant d'Ether associé à ce compte Ethereum. Pour cela, modifiez la fonction getBalance, qui prend en paramètre la clé publique d'un compte et qui doit renvoyer le montant en Ether de ce compte.
 
