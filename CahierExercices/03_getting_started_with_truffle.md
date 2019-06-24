@@ -6,11 +6,13 @@
 
 See : https://code.visualstudio.com/docs/editor/extension-gallery
 
-- Installer la dernière version de npm
+- Installer la dernière version de npm (`6.1.0`)
 
 ## Mise en place de Truffle
-- Installer truffle `npm install --save-dev truffle`
-- Initialiser un projet truffle `npx truffle init`
+- Installer `npx` : `npm install -g npx`.
+- Installer truffle `npm install --save-dev truffle`.
+- Initialiser un projet truffle `npx truffle init`.
+
 Cette commande va créer l'arborescence suivante : 
 
 `contracts` : les fichiers solidity contenant vos smart contracts,
@@ -22,7 +24,15 @@ Cette commande va créer l'arborescence suivante :
 `truffle-config.js` : fichier de configuration du projet Truffle
 
 
-- Dans le fichier `truffle-config.js`, prendre connaissance des informations présentes et ajouter la pair clé / valeur suivante: `contracts_build_directory: "src/contracts"` dans l'objet `module.exports`. Cela nous permet de définir le dossier cible des contrats compilés
+- Dans le fichier `truffle-config.js`, prendre connaissance des informations présentes et ajouter la pair clé / valeur `contracts_build_directory: "src/contracts"` :
+```Javascript
+module.exports {
+  ...
+  contracts_build_directory: "src/contracts"
+}
+```
+
+Cela nous permet de définir le dossier cible des contrats compilés
 - Copier le premier smart contract `Betting.sol` du TP 2 dans le répertoire : `contracts` à la racine de votre projet. 
 - Créer un fichier `2_deploy_contracts.js` dans le répertoire `migrations` contenant le script de déploiement suivant :
 ```Javascript
