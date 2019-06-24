@@ -5,9 +5,9 @@ Ce TP a pour but d'interagir avec des structures de données plus complexes et d
 ## Implémentation de la fonctionnalité de création de match
 
 - Déclarez une enum `MatchState` qui contiendra les états suivants de match : 
-  - `UNSETTLED`,
-  - `HOME_VICTORY`,
-  - `CHALLENGER_VICTORY`, 
+  - `UNSETTLED`
+  - `HOME_VICTORY`
+  - `CHALLENGER_VICTORY` 
   - `EQUALITY`
 
 - Déclarez une `struct` Match représentant un match:
@@ -24,7 +24,7 @@ struct Match {
 ```
 
 - Déclarez un tableau de Match public
-- Créez un event `matchCreation` qui va afficher les paramètres  `homeTeam`, `externalTeam`, `libelle` , `date` et `quotation` passés à la fonctionnalité de création de match 
+- Créez un event `matchCreation` qui va afficher les paramètres  `homeTeam`, `externalTeam`, `libelle` , `date` et `quotation` passés à la fonctionnalité de création de match .
 - Compléter la fonction de création de match qui aura une visibilité `external` et qui va permettre de créer un match, de l'ajouter à notre tableau de Match et d'émettre un évenement `matchCreation` quand le match est créé. 
 - Utiliser le mot clé `require` afin que seul le propriétaire du smart contract puisse appeler cette fonction.
 
@@ -60,9 +60,9 @@ Ce fichier a déjà une première fonction de tests unitaires en place.
 - Comprenez ce que fait cette fonction (l'utilisation du mot clé `storage`, le `require`).
 
 - En vous inspirant du test unitaire existant, mettez en place un test unitaire pour cette nouvelle fonction. Ce test unitaire doit : 
-  - déployer le smart contract sur la blockchain de dév
-  - créer un match
-  - le résoudre en indiquant une victoire du challenger
-  - vérifier que le statut du match est victoire du challenger après résolution
+  - Déployer le smart contract sur la blockchain de dév.
+  - Créer un match.
+  - Le résoudre en indiquant une victoire du challenger.
+  - Vérifier que le statut du match est victoire du challenger après résolution.
 
 
