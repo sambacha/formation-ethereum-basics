@@ -314,5 +314,3 @@ var event = myContractInstance.myEvent([filterObject] [, additionalFilterObject]
 # TP 6 : Link the Smart Contract with a webapp
 
 <!-- .slide: class="page-tp6" -->
-
-

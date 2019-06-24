@@ -144,5 +144,3 @@ We will see the web3.js library usage in the next chapters.
 
 # TP 4 : Unit test with Truffle
 <!-- .slide: class="page-tp5" -->
-
-

@@ -493,5 +493,3 @@ A D-App allowing users to gamble on football matchs in a decentralized fashion.
 # TP2 - First smart contract on Remix IDE
 
 <!-- .slide: class="page-tp2" -->
-
-

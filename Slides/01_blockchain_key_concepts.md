@@ -1433,5 +1433,3 @@ What you can do with a 51% attack :
 
 What you cannot do : 
 - impersonnate another member of the network : you can't spend a coin that is not your as you still don't have the private key needed,
-
-
