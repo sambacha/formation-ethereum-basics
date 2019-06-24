@@ -2,125 +2,95 @@
 
 In this TP, we will create an ethereum network of 3 nodes, using the **geth** ethereum node and Docker.
 
-
-## Create a blockchain from a genesis block
-
-Launch the first node
-
-Launch a second node
-
-Setup a blockchain explorer
-
-Connect Metamask to the blockchain
-
-Deploy a smart contract on the blockchain
+## Install Docker
+Get the docker installer available on the USD drive.
 
 
+## Launch Docker
 
 
-Facile : Un client en local
-docker run -ti  parity/parity:stable --config dev
-
-Puis montrer comment on peut lancer un truc mieux sur ubuntu.
-
- 
-
-Etape plus compliqué : 
-une blockchain avec plusieurs noeuds et un explorateur de blocs
-
-
-
-Fisrt of all, generate the configuration for your network.
-
-Get the parity deploy script on : https://github.com/paritytech/parity-deploy
-
-Launch the script ./parity-deploy.sh --config aura
-With a docker container 
- docker run -it --mount src="$(pwd)",target=/scripting-repo,type=bind  slauncher /bin/bash
-
-Exit from the container Crtl + D
-
-Command list
-
-cd /scripting-repo
-su - 
-apt-get update
-apt-get install sudo
-exit
-sudo apt-get install curl
-sudo apt-get install wget
-sed -i -e 's/\r$//' clean.sh
-sed -i -e 's/\r$//' ./config/utils/keygen.sh
-sed -i -e 's/\r$//' parity-deploy.sh
-
-./parity-deploy.sh --config aura
-
-Once parity-deploy has been run it will generate configuration files which are kept in the deployment folder. There are a few subdirectories that may exist in this location:
-
-deployment/chain - this contains chain information such as spec file (spec.json) and other files like the reserved_peers file.
-
-deployment/is_authority - this directory contains the configuration for an instant sealing authority. It has key.priv (private key file), key.pub (public key file), address.txt (pre-created authority address), password (plain text password file) and authority.toml (authority's parity config file).
-
-deployment/client - this directory contains the configuration for an instant sealing client. It has key.priv (private key file), key.pub (public key file), address.txt (pre-created client address), password (plain text password file) and client.toml (client's parity config file).
-
-deployment/[1/2/3] - these directories are used when you are using multiple aura validators - It has key.priv (private key file), key.pub (public key file), address.txt (pre-created authority address), password (plain text password file) and authority.toml (authority's parity config file).
-
-All of these nodes are then added to the to the chains/reserved_peers file.
-
-Description docker-compose.yml
-
-This composer file is launching parity with the following parameters :
---chain /home/parity/spec.json : a json file which is describing the --config /home/parity/authority.toml -d /home/parity/data 
-
-Description ./deployment/chain/spec.json
-
-"name": "parity",
-
-The chain name will be parity
-
-
-"engine": {
-    "authorityRound": {
-        "params": {
-            "stepDuration": "2",
-            "validators" : {
-                "list": [ "0x0e29d31a1866c1f4fde90a3edd7016fc8786bfdb" ]
-            }
-        }
+A step by step guide to create an ethereum private blockchain.
+1) Create a genesis block, hou can do it manually or use a genesis block generator.
+It looks like this :
+```
+{
+  "config": {
+    "chainId": <mychainid>,
+    <fork indicators and other parameters>
+  "alloc": {
+    "3590aca93338b0721966a8d0c96ebf2c4c87c544": {
+      "balance": "0x200000000000000000000000000000000000000000000000000000000000000"
+    },
+    "8cc5a1a0802db41db826c2fcb72423744338dcb0": {
+      "balance": "0x200000000000000000000000000000000000000000000000000000000000000"
     }
-},
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
 
-The consensus mecanism will be proof of authority.
-It will be handled by 1 validator.
+The chainId and the alloc part are very important. You can set any chainId you want (just try to avoid a number inferior to 1000). This will separate your blockchain from the other ethereum blockhains.
 
-Description  ./deployment/chain/reserved_peers
-Description  ./deployment/1/password
-Description  ./deployment/1/authority.toml
-Description  ./deployment/1/${NETWORK_NAME}
-Description  ./config/dev.json
-Description  ./deployment/1/key.priv
-Description  ./data/1
+And the alloc part will attribute some initial coin to the specified account. Here, we are giving a lot of fake ether to two accounts 3590aca93338b0721966a8d0c96ebf2c4c87c544 and 8cc5a1a0802db41db826c2fcb72423744338dcb0.
 
-docker volume create --driver=local --opt o=uid=1000 --opt type=tmpfs --opt device=tmpfs paritydb
+```
+2) Create a bootnode. The bootnode role is to provide new nodes with a list a initial node to connect with.
+An executable bootnode is provides with the ethereum distribution.
+
+First you need to generate a private key to give an id to the bootnode. To do so :
+```
+bootnode -genkey bootnode.key
+```
+
+You can launch it with :
+bootnode -nodekeyhex $nodekeyhex
+<nodekeyhex> being a private key stored in the nodekeyhex file.
+The node id will by a public key derived from the specified private key.
+
+3) Launch a first miner.
+```
+geth --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --networkid "6660001" --verbosity=4  --syncmode=full --mine --gasprice "0" --etherbase $address --unlock $address --password ~/.accountpassword
+```
+
+--bootnodes : with this paramater, you specify the bootnode you will use. The bootnode will store your ip and your node id for futures nodes.
+
+--networkid : the networkId is used to isolate your network from other networks as connections between nodes are valid only if peers have identical protocol version and network ID. The network id must be the one you specified in the genesis block.
+
+--syncmode : full will create a full node which will store every single block of the blockchain
+
+--mine : launch the node in miner mode, it will validate block
+
+--gazprice : setup a threshold under which your miner won't process and even propagate a transaction with a gaz price inferior to the threshold  
+
+--etherbase : all the ether earns by the miner when he will successfully mines blocks will be credited to this address
+
+--unlock : the unlock parameter will allow your miner to make transactions if need be
+
+--password : the password is needed to unlock the miner account
+
+4) Launch a second miner the wame way with another adress
+
+5) And launch a third node, not in mining mode but with some api endpoint to interrogate it with a Dapp : 
+
+```
+geth --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --networkid "6660001"  --rpc --rpcaddr "0.0.0.0" --rpcapi "eth,web3,net,admin,debug,db" --ipcapi "eth,net,web3" --rpccorsdomain "*" --syncmode="full"
+```
+--rpc, --rpcaddr, --rpcapi : enable the HTTP RPC interface to communicate with the current node on http in json. This interface will allow to interact with the node using a Dapp (get transaction informations, get node informations...) 
+There are several api that you can enable with those flags as the miner api. 
+
+--rpccorsdomain : indicates the domain names allowed to request our node, useful when we wish to call our node from *localhost*.
+
+--ipcapi : allow to request some APIs though IPC (unix socket)
 
 
 
+5) Finally you can starts an webapp called ethstat monitor to check on your blockchain. We can use  The Ethereum (centralised) network status monitor (known sometimes as "eth-netstats") to monitor your nodes.
 
-## Geth
-Extract from: https://ethereum.stackexchange.com/questions/2376/what-does-each-genesis-json-parameter-mean
-
-mixhash A 256-bit hash which proves, combined with the nonce, that a sufficient amount of computation has been carried out on this block: the Proof-of-Work (PoW). The combination of nonce and mixhash must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44). It allows to verify that the Block has really been cryptographically mined, thus, from this aspect, is valid.
-
-nonce A 64-bit hash, which proves, combined with the mix-hash, that a sufficient amount of computation has been carried out on this block: the Proof-of-Work (PoW). The combination of nonce and mixhash must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44), and allows to verify that the Block has really been cryptographically mined and thus, from this aspect, is valid. The nonce is the cryptographically secure mining proof-of-work that proves beyond reasonable doubt that a particular amount of computation has been expended in the determination of this token value. (Yellowpager, 11.5. Mining Proof-of-Work).
-
-parentHash The Keccak 256-bit hash of the entire parent block header (including its nonce and mixhash). Pointer to the parent block, thus effectively building the chain of blocks. In the case of the Genesis block, and only in this case, it’s 0.
-
-difficulty A scalar value corresponding to the difficulty level applied during the nonce discovering of this block. It defines the mining Target, which can be calculated from the previous block’s difficulty level and the timestamp. The higher the difficulty, the statistically more calculations a Miner must perform to discover a valid block. This value is used to control the Block generation time of a Blockchain, keeping the Block generation frequency within a target range. On the test network, we keep this value low to avoid waiting during tests, since the discovery of a valid Block is required to execute a transaction on the Blockchain.
-
-gasLimit A scalar value equal to the current chain-wide limit of Gas expenditure per block. High in our case to avoid being limited by this threshold during tests. Note: this does not indicate that we should not pay attention to the Gas consumption of our Contracts.
-
-timestamp A scalar value equal to the reasonable output of Unix time() function at this block inception. This mechanism enforces a homeostasis in terms of the time between blocks. A smaller period between the last two blocks results in an increase in the difficulty level and thus additional computation required to find the next valid block. If the period is too large, the difficulty, and expected time to the next block, is reduced. The timestamp also allows verifying the order of block within the chain (Yellowpaper, 4.3.4. (43)).
-
-extraData An optional free, but max. 32-byte long space to conserve smart things for ethernity.
-
-coinbase The 160-bit address to which all rewards (in Ether) collected from the successful mining of this block have been transferred. They are a sum of the mining reward itself and the Contract transaction execution refunds. Often named “beneficiary” in the specifications, sometimes “etherbase” in the online documentation. This can be anything in the Genesis Block since the value is set by the setting of the Miner when a new Block is created.
+You can clone its git repository and launch it with the following commands : 
+```
+git clone https://github.com/cubedro/eth-netstats
+cd eth-netstats
+npm install
+sudo npm install -g grunt-cli
+```

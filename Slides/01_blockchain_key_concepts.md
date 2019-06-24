@@ -222,6 +222,17 @@ Notes : Currently there are about 1.5 thousand different cryptocurrencies and a 
 
 
 
+## Sum-up
+
+A blockchain provides : 
+
+- the storage and transmission of facts between peers
+- an transparent and auditable registry
+- an immutable registry
+- a trustable registry given that the facts veracity and order are determined by a consensus
+
+
+
 # Technical Prerequisite
 
 
@@ -473,38 +484,6 @@ And he passes it along with the message and the signature to the ECDSA signature
 
 
 
-## Blockchain structure
-
-<figure>
-    <img src="ressources/block-structure-1.svg" alt="blockstructure"/>
-</figure>
-
-
-
-## Blockchain structure
-
-<figure>
-    <img src="ressources/block-structure-2.svg" alt="blockstructure"/>
-</figure>
-
-
-
-## Blockchain structure
-
-<figure>
-    <img src="ressources/block-structure-3.svg" alt="blockstructure"/>
-</figure>
-
-
-
-## Blockchain structure
-
-<figure>
-    <img src="ressources/block-structure-4.svg" alt="blockstructure"/>
-</figure>
-
-
-
 ## Peer to peer network
 <figure>
     <img src="ressources/peer-to-peer.png" alt="peer to peer"  height="600px"/>
@@ -543,251 +522,43 @@ The node will contact each node by sending its address, and then requiring a lis
 
 
 
-# Blockchain Governance
+# More on blockchains
 
 
 
-## Blockchain typology
-
-Peer to peer network composed of : 
-
-- full nodes
-
-- lightweight nodes
-
-- miners
-
-<!-- .element style="margin-top:100px"-->
-The distinction between those members is made by the wallet they use.
-
-
-
-## Wallet : full nodes
+## Blockchain structure
 
 <figure>
-    <img src="ressources/full_node.svg" alt="full node"  height="600px"/>
+    <img src="ressources/block-structure-1.svg" alt="blockstructure"/>
 </figure>
 
-Notes : when you want to install a blockchain node on your workstation, you will have to install a software which is often called a wallet.
-When you choose a wallet, you have two options : 
-- full node 
-- lightweight node 
-A full node is the recommanded software for a blockchain because it's the most decentralized option. 
-A full node wallet contains : 
--  a full node : the piece of software that received all the new blocks of the network, validate them, and store them locally. 
-When a full node boots for the first time, it usually download all the blocks since the beginning of the blockchain and verify each transactions in them. It's a ver long process.
-- a keystore (the wallet part) : the keystore is the place where all the private/publics keys pairs of the accounts owned by the user are stored. 
-- a mining package  : if you want to provide power or stake to protect the blockchain and be rewarded for it, you can activate the miner/validation part of your node to start securing the network. We will detail these process later on. 
 
 
-
-## Wallet : Lightweight nodes
-
-<figure >
-    <img src="ressources/lightweight_wallet.svg" alt="lightweight node" width="450px"/>
-</figure>
-
-Notes : 
-- lightweight node :
-it contains only the keystore and the transactions related to these keys.
-
-
-
-## Installation of a lightwallet
-
-<!-- .slide: class="page-demo" -->
-
-Notes : Electrum pour Bitcoin par exemple
-Show the key generation process
-Show the send and received part
-Explain that the launching of the app is relatively quick as it does not download all transactions
-
-
-
-## Lightweight node and decentralisation
+## Blockchain structure
 
 <figure>
-    <img src="ressources/lightweight_wallet_integration.svg" alt="lightweight node"/>
+    <img src="ressources/block-structure-2.svg" alt="blockstructure"/>
 </figure>
 
-Notes : To track them, it still need to get informations from the rest of the network
-A lightweight node still need to synchronize with a full node to get its information. It's clearly less decentralized as you are relying on a set of full nodes to get your informations and if those node get corrupted, your lightweight wallet get corrupted too.
 
 
-
-# Blockchain fork
-
-
-
-## Forked blockchain 
-
-<figure> 
-    <img src="ressources/blockchain-fork.png" alt="blockchain fork" height="550px"/>
-</figure>
-
-<!-- .element style="text-align:center;color:Gainsboro"-->
-Source : medium.com/@preethikasireddy/how-does-ethereum-work-anyway-
-
-
-
-## Heaviest chain 
-
-<figure> 
-    <img src="ressources/blockchain-fork-solved.png" alt="blockchain fork" height="350px"/>
-</figure>
-
-<!-- .element style="text-align:center;color:Gainsboro"-->
-Source : medium.com/@preethikasireddy/how-does-ethereum-work-anyway-
-
-
-
-## Natural fork example
+## Blockchain structure
 
 <figure>
-    <img src="ressources/Blockchain_fork_step_N-8.svg" alt="fork"/>
+    <img src="ressources/block-structure-3.svg" alt="blockstructure"/>
 </figure>
 
-Notes : Consider the last mined block of the blockchain, here called N.
 
 
-
-## Natural fork example
+## Blockchain structure
 
 <figure>
-    <img src="ressources/Blockchain_fork_step_N-7.svg" alt="fork"/>
+    <img src="ressources/block-structure-4.svg" alt="blockstructure"/>
 </figure>
 
-Notes : In a POW blockchain, a block is supposed to be mined every X minutes. But it's a random process. Sometimes it can take 2 minutes, other time 20 minutes, the most important thing is that it should be 10 minutes, on average on a given time period.
-Because of this randomness, sometimes, two miners can effectively mine a block at about the same time. When this happens, the network experiences a 'natural' fork.
-Both successfull miners send their valid block to the rest of the network. So all the network nodes will get either block N+1 or block N+1' first, and they will start to mine their candidate block which will included the hash of N+1 (respectivily N+1'). They will ignore the other block N+1' (respectivily N+1), received later, for the time being.
 
 
-
-## Natural fork example
-
-<figure>
-    <img src="ressources/Blockchain_fork_step_N-7_bis.svg" alt="fork"/>
-</figure>
-
-Notes : So at one point, when all the network miner will have choose one of the two blocks and the mining power will be divided between those who choose the block N+1 and those who choose the block N+1'.
-The winner will be decided based on the mining power behind the competiting blocks.
-In this case the block N+1 has been received first by 60% percent of the miners, so...
-
-
-
-## Natural fork example
-
-<figure>
-    <img src="ressources/Blockchain_fork_step_N-6.svg" alt="fork"/>
-</figure>
-
-Notes : The next block will likely be build on it. This will solve the fork because when this next block N+2 is broadcasted to the other node, the one's still working on the fork of the N+1' block will abandon their current candidate block and start working on another block base on the N+2 block. Therefore, the conflict will be solved.
-
- The other block will be marked as orphaned and will be ignored by the rest of the network. The transactions in it will either be part of the majority-selected block or will return to the waiting pool. And the miner of the orphaned block won't received any reward.
-
-
-
-## Blockchain Governance
-
-Technical updates are made by updating the node's softwares.
-
-<!-- .element style="margin-top:50px"-->
-*Democratic :* the majory of the network node must install a new software changes.
-
-Notes : To upgrade a blockchain protocol (change some parameters as mining time, block size ... or even something more important as replacing POW with POS), the miners have to change their softwares.
-So blockchain like NEO keep a centralized governance, avoiding the risk of a fork
-
-
-
-## Provoked fork
-
-<!-- .element class="alert alert-info"-->
-A fork happens wheh a developer want to amend the configuration or the rules of the current mining software and the change doesn't convince everyone.
-
-They are actually three types of forks :
-
-- hard forks
-
-- soft forks
-
-- user activated forks
-
-
-Notes : A fork can also be proposed by a developer who wish to amend the configuration or the rules of the current mining software.
-
-If the proposed changes win unanimous support, every miner will agree on the software, and change its software. The changes will become the new rules of the network and every miner who don't follow them will be ignored by the network.
-
-But it's rarely such an ideal scenario.
-In most case, a significant part of the miners disagree with the software update and decide to stay with the current software.
-This is a fork.
-In that case, the mining ressources will be divided into two factions : the ones that support the fork and the ones that don't.
-
-
-
-## Hard fork
-
-<figure>
-    <img src="ressources/this-is-sparta.jpg" alt="sparta" height= "300px"/>
-</figure>
-
-- Miners only
-
-- Uncompatible software
-
-- Split the network in two separate chains : 
-
-  - one who agrees with the change
-
-  - those who don't
-
-Notes : The software upgrade introduces a new rule to the network that isn't compatible with the older software (A new rule that allows block size to be 2MB instead of 1MB would require a hard fork).
-
-What happens? Nodes that continue running the old version of the software will see the new transactions as invalid. So, to switch over to the new chain and to continue to mine valid blocks, all of the nodes in the network need to upgrade to the new rules.
-
-Therefore two chains will be created based on a common history, and the mining power of both network will be divided (hence degrading the security of the blockchain).
-
-The ethereum DAO hard fork was a perfect case study of how a community can split over rules. Now, we have two blockchains using a variant of the software - ethereum and ethereum classic, both of which boast a different ethos and a different currency.
-
-
-
-## Soft fork
-
-- Miners only
-
-- Retrocompatibles changes
-
-- New mined blocks accepted by the old miners
-
-- But the reverse is not true
-
-- Will work only if the majority adopt the software change
-
-Notes : This happen when the proposed changes are retrocompatibles.
-In this case the blocks mined by the updated nodes will be accepted by the old ones. But the blocks mined by the old software miners won't be accepted by the updates nodes.
-This will end well if the majority of the miner update their software. If not, the soft fork chain will become the shortest and be ignored.
-
-
-
-## User activated fork
-
-Fork mode which is giving power to all the full nodes and not just the miners
-
-Notes : This kind of fork is still a theory.
-What is it? A user-activated soft fork (UASF) is a controversial idea that explores how a blockchain might add an upgrade that is not directly supported by those who provide the network's hashing power.
-
-The idea with UASF is that instead of waiting for a threshold of support from mining pools, the power to activate a soft fork goes to the exchanges, wallets and businesses who are running full nodes. (In bitcoin, a full node, even if it is not a mining node, is still responsible for validating blocks.)
-
-What happens? The majority of major exchanges would need to publicly support the change before it could be written into a new version of code. After that, the new software (which has an activation point in the future) gets installed on nodes that want to participate in the soft fork.
-
-What can go wrong? This method requires a much longer lead time to work than a hash-power-triggered soft fork. In fact, it's believed it may take as long as a year or more to write the code and get everyone ready.
-
-Further, if the majority of miners end up not 'falling in line' and activating the new rules, they could use their overwhelming hash power to split the network.
-
-Currently this idea is theoretical and has not been implemented.
-
-
-
-## Buying a pizza with Bitcoin
+## Back to basics : buying a pizza with Bitcoin
 
 <figure>
     <img src="ressources/bitcoin_example_1.svg" alt="bitcoin-sample" height="500px"/>
@@ -1085,7 +856,6 @@ He will get the block reward (some Bitcoins created from thin air by the protoco
 
 
 
-
 ## The new block is broadcasted to network
 
 The new found block will then be broadcasted to the network and each node will :
@@ -1115,6 +885,250 @@ In the case of a more important transaction where big sums are at stake, the sel
 Notes : 
 Show the content of a block, how they are chained,
 the input and outputs of a transaction.
+
+
+
+# Blockchain Governance
+
+
+
+## Blockchain typology
+
+Peer to peer network composed of : 
+
+- full nodes
+
+- lightweight nodes
+
+- miners
+
+<!-- .element style="margin-top:100px"-->
+The distinction between those members is made by the wallet they use.
+
+
+
+## Wallet : full nodes
+
+<figure>
+    <img src="ressources/full_node.svg" alt="full node"  height="600px"/>
+</figure>
+
+Notes : when you want to install a blockchain node on your workstation, you will have to install a software which is often called a wallet.
+When you choose a wallet, you have two options : 
+- full node 
+- lightweight node 
+A full node is the recommanded software for a blockchain because it's the most decentralized option. 
+A full node wallet contains : 
+-  a full node : the piece of software that received all the new blocks of the network, validate them, and store them locally. 
+When a full node boots for the first time, it usually download all the blocks since the beginning of the blockchain and verify each transactions in them. It's a ver long process.
+- a keystore (the wallet part) : the keystore is the place where all the private/publics keys pairs of the accounts owned by the user are stored. 
+- a mining package  : if you want to provide power or stake to protect the blockchain and be rewarded for it, you can activate the miner/validation part of your node to start securing the network. We will detail these process later on. 
+
+
+
+## Wallet : Lightweight nodes
+
+<figure >
+    <img src="ressources/lightweight_wallet.svg" alt="lightweight node" width="450px"/>
+</figure>
+
+Notes : 
+- lightweight node :
+it contains only the keystore and the transactions related to these keys.
+
+
+
+## Installation of a lightwallet
+
+<!-- .slide: class="page-demo" -->
+
+Notes : Electrum pour Bitcoin par exemple
+Show the key generation process
+Show the send and received part
+Explain that the launching of the app is relatively quick as it does not download all transactions
+
+
+
+## Lightweight node and decentralisation
+
+<figure>
+    <img src="ressources/lightweight_wallet_integration.svg" alt="lightweight node"/>
+</figure>
+
+Notes : To track them, it still need to get informations from the rest of the network
+A lightweight node still need to synchronize with a full node to get its information. It's clearly less decentralized as you are relying on a set of full nodes to get your informations and if those node get corrupted, your lightweight wallet get corrupted too.
+
+
+
+# Blockchain fork
+
+
+
+## Forked blockchain 
+
+<figure> 
+    <img src="ressources/blockchain-fork.png" alt="blockchain fork" height="550px"/>
+</figure>
+
+<!-- .element style="text-align:center;color:Gainsboro"-->
+Source : medium.com/@preethikasireddy/how-does-ethereum-work-anyway-
+
+
+
+## Heaviest chain 
+
+<figure> 
+    <img src="ressources/blockchain-fork-solved.png" alt="blockchain fork" height="350px"/>
+</figure>
+
+<!-- .element style="text-align:center;color:Gainsboro"-->
+Source : medium.com/@preethikasireddy/how-does-ethereum-work-anyway-
+
+
+
+## Natural fork example
+
+<figure>
+    <img src="ressources/Blockchain_fork_step_N-8.svg" alt="fork"/>
+</figure>
+
+Notes : Consider the last mined block of the blockchain, here called N.
+
+
+
+## Natural fork example
+
+<figure>
+    <img src="ressources/Blockchain_fork_step_N-7.svg" alt="fork"/>
+</figure>
+
+Notes : In a POW blockchain, a block is supposed to be mined every X minutes. But it's a random process. Sometimes it can take 2 minutes, other time 20 minutes, the most important thing is that it should be 10 minutes, on average on a given time period.
+Because of this randomness, sometimes, two miners can effectively mine a block at about the same time. When this happens, the network experiences a 'natural' fork.
+Both successfull miners send their valid block to the rest of the network. So all the network nodes will get either block N+1 or block N+1' first, and they will start to mine their candidate block which will included the hash of N+1 (respectivily N+1'). They will ignore the other block N+1' (respectivily N+1), received later, for the time being.
+
+
+
+## Natural fork example
+
+<figure>
+    <img src="ressources/Blockchain_fork_step_N-7_bis.svg" alt="fork"/>
+</figure>
+
+Notes : So at one point, when all the network miner will have choose one of the two blocks and the mining power will be divided between those who choose the block N+1 and those who choose the block N+1'.
+The winner will be decided based on the mining power behind the competiting blocks.
+In this case the block N+1 has been received first by 60% percent of the miners, so...
+
+
+
+## Natural fork example
+
+<figure>
+    <img src="ressources/Blockchain_fork_step_N-6.svg" alt="fork"/>
+</figure>
+
+Notes : The next block will likely be build on it. This will solve the fork because when this next block N+2 is broadcasted to the other node, the one's still working on the fork of the N+1' block will abandon their current candidate block and start working on another block base on the N+2 block. Therefore, the conflict will be solved.
+
+ The other block will be marked as orphaned and will be ignored by the rest of the network. The transactions in it will either be part of the majority-selected block or will return to the waiting pool. And the miner of the orphaned block won't received any reward.
+
+
+
+## Blockchain Governance
+
+Technical updates are made by updating the node's softwares.
+
+<!-- .element style="margin-top:50px"-->
+*Democratic :* the majory of the network node must install a new software changes.
+
+Notes : To upgrade a blockchain protocol (change some parameters as mining time, block size ... or even something more important as replacing POW with POS), the miners have to change their softwares.
+So blockchain like NEO keep a centralized governance, avoiding the risk of a fork
+
+
+
+## Provoked fork
+
+<!-- .element class="alert alert-info"-->
+A fork happens wheh a developer want to amend the configuration or the rules of the current mining software and the change doesn't convince everyone.
+
+They are actually three types of forks :
+
+- hard forks
+
+- soft forks
+
+- user activated forks
+
+
+Notes : A fork can also be proposed by a developer who wish to amend the configuration or the rules of the current mining software.
+
+If the proposed changes win unanimous support, every miner will agree on the software, and change its software. The changes will become the new rules of the network and every miner who don't follow them will be ignored by the network.
+
+But it's rarely such an ideal scenario.
+In most case, a significant part of the miners disagree with the software update and decide to stay with the current software.
+This is a fork.
+In that case, the mining ressources will be divided into two factions : the ones that support the fork and the ones that don't.
+
+
+
+## Hard fork
+
+<figure>
+    <img src="ressources/this-is-sparta.jpg" alt="sparta" height= "300px"/>
+</figure>
+
+- Miners only
+
+- Uncompatible software
+
+- Split the network in two separate chains : 
+
+  - one who agrees with the change
+
+  - those who don't
+
+Notes : The software upgrade introduces a new rule to the network that isn't compatible with the older software (A new rule that allows block size to be 2MB instead of 1MB would require a hard fork).
+
+What happens? Nodes that continue running the old version of the software will see the new transactions as invalid. So, to switch over to the new chain and to continue to mine valid blocks, all of the nodes in the network need to upgrade to the new rules.
+
+Therefore two chains will be created based on a common history, and the mining power of both network will be divided (hence degrading the security of the blockchain).
+
+The ethereum DAO hard fork was a perfect case study of how a community can split over rules. Now, we have two blockchains using a variant of the software - ethereum and ethereum classic, both of which boast a different ethos and a different currency.
+
+
+
+## Soft fork
+
+- Miners only
+
+- Retrocompatibles changes
+
+- New mined blocks accepted by the old miners
+
+- But the reverse is not true
+
+- Will work only if the majority adopt the software change
+
+Notes : This happen when the proposed changes are retrocompatibles.
+In this case the blocks mined by the updated nodes will be accepted by the old ones. But the blocks mined by the old software miners won't be accepted by the updates nodes.
+This will end well if the majority of the miner update their software. If not, the soft fork chain will become the shortest and be ignored.
+
+
+
+## User activated fork
+
+Fork mode which is giving power to all the full nodes and not just the miners
+
+Notes : This kind of fork is still a theory.
+What is it? A user-activated soft fork (UASF) is a controversial idea that explores how a blockchain might add an upgrade that is not directly supported by those who provide the network's hashing power.
+
+The idea with UASF is that instead of waiting for a threshold of support from mining pools, the power to activate a soft fork goes to the exchanges, wallets and businesses who are running full nodes. (In bitcoin, a full node, even if it is not a mining node, is still responsible for validating blocks.)
+
+What happens? The majority of major exchanges would need to publicly support the change before it could be written into a new version of code. After that, the new software (which has an activation point in the future) gets installed on nodes that want to participate in the soft fork.
+
+What can go wrong? This method requires a much longer lead time to work than a hash-power-triggered soft fork. In fact, it's believed it may take as long as a year or more to write the code and get everyone ready.
+
+Further, if the majority of miners end up not 'falling in line' and activating the new rules, they could use their overwhelming hash power to split the network.
+
+Currently this idea is theoretical and has not been implemented.
 
 
 
@@ -1421,85 +1435,3 @@ What you cannot do :
 - impersonnate another member of the network : you can't spend a coin that is not your as you still don't have the private key needed,
 
 
-
-# The three types of blockchain
-
-
-
-## Public blockchains
-
-<figure> 
-    <img src="ressources/public_blockchain.png" alt="public_blockchain" height="500px"/>
-</figure>
-
-<!-- .element style="text-align:center;color:Gainsboro"-->
-Source : [Utilization of Distributed Technologies for Custom Solutions on Medium](https://medium.com/applicature/utilization-of-distributed-technologies-for-custom-solutions-public-private-and-hybrid-570a1e14852)
-
-
-
-## Public blockchains
-**Pros :**
-
-- everyone can transact and participate in the consensus
-- everyone can audit all the blockchain datas at any time
-- secured by a large network
-
-<!-- .element style="margin-top:50px"-->
-**Cons :** 
-
-- costly
-- not scalable (for now)
-- no data privacy
-
-
-
-## Hybrid blockchains
-
-<figure> 
-    <img src="ressources/hybrid_blockchain.png" alt="hybrid blockchain" height="500px"/>
-</figure>
-
-<!-- .element style="text-align:center;color:Gainsboro"-->
-Source : [Utilization of Distributed Technologies for Custom Solutions on Medium](https://medium.com/applicature/utilization-of-distributed-technologies-for-custom-solutions-public-private-and-hybrid-570a1e14852)
-
-
-
-## Hybrid blockchains
-
-**Pros :**
-
-- a authorization module decides who can send transaction, participate to the consensus or read datas,
-- secured channel allows users to communicate privatly,
-- reduced costs,
-- currently great to implement business usecases.
-
-<!-- .element style="margin-top:50px"-->
-**Cons :** 
-
-- the authorization module is not decentralized
-
-
-
-## Private blockchains
-
-<figure> 
-    <img src="ressources/private_blockchain.png" alt="private blockchain" height="500px"/>
-</figure>
-
-<!-- .element style="text-align:center;color:Gainsboro"-->
-Source : [Utilization of Distributed Technologies for Custom Solutions on Medium](https://medium.com/applicature/utilization-of-distributed-technologies-for-custom-solutions-public-private-and-hybrid-570a1e14852)
-
-
-
-## Private blockchains
-
-**Pros :**
-
-- a central authority decides who can send transaction, participate to the consensus or read datas,
-- datas are safes.
-
-<!-- .element style="margin-top:50px"-->
-**Cons :** 
-
-- the central authority,
-- a glorified database ?

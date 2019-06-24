@@ -1,13 +1,14 @@
 [
   "00_agenda.md",
   "01_blockchain_key_concepts.md",
-  "02_ethereum_basics.md",
-  "03_solidity_basics.md",
-  "04_truffle_and_deployment.md",
-  "05_unit_testing.md",
-  "06_d_app.md",
-  "07_solidity_advanced.md",
-  "08_oracles.md",
-  "09_security_and_cost.md",
-  "10_what_s_next.md"
+  "02_blockchain_use_cases.md",
+  "03_ethereum_basics.md",
+  "04_solidity_basics.md",
+  "05_truffle_and_deployment.md",
+  "06_unit_testing.md",
+  "07_d_app.md",
+  "08_solidity_advanced.md",
+  "09_oracles.md",
+  "10_security_and_cost.md",
+  "11_what_s_next.md"
 ]
