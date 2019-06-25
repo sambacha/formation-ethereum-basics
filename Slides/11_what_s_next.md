@@ -21,33 +21,50 @@
 
 
 
-## Ethereum POS : Casper
+## Serenity Phase 0
 
-2 implementations : 
-- Friendly-Finality-Gadget (mix POW/ POS)
-- Correct-By-Construction (POS)
+The next release of ethereum is called `Serenity`. 
 
-Notes : POs in two steps to avoid any big bang and introduce this huge change slowly
+This is a huge release for Ethereum as it will introduce a new consensus algorithm (Casper FFG) and sharding capabilities.
+
+It will happened in 3 phases :
+
+- Phase 0: deployment of the `beacon chain`,  scheduled to be released around the end of 2019 / beginning of 2020
+  - a new chain will be setted up, using Proof-of-Stake. This chain would handle transactions for a while,
+  - validators will secure the `beacon chain` after depositing 32 Ethers on a specific smart contract.
 
 
 
-## Friendly-Finality-Gadget (mix POW/ POS) 
+## Serenity Phase 1
 
-Smart contract layer for POS over POW network
+- Phase 1 : introduction of 1024 shard chains, release date TBD
+  - shards will be managed by the beacon chain and are destined to contain smart contract and execute transactions,
+  - Still no transactions execution at this point.
 
-You become a validator by depositing 1500 ether !!! on this smart contract
 
-You can then vote on next block. The blocks get elected with 2/3 of the voting weight
 
-Epoch : checkpoint every 50 blocks
+## Serenity Phase 2
 
-POw mine blocks and pos validate checkpoints at any Epochs (every 50 blocks)
+- Phase 2 : deployment of the transaction execution engine (eWASM). Full POS Blockchain enabled and usable. Release date TBD
+  - The ethereum team expects to multiply by 1000 the number of transactions per second with those changes.
 
-finality achieved when two consecutive checkpoint receive 2/3 votes
+
+
+## eWASM
+
+WebAssembly (or Wasm as a contraction) is a new, portable, size- and load-time-efficient format. WebAssembly aims to execute at native speed by taking advantage of common hardware capabilities available on a wide range of platforms. WebAssembly is currently being designed as an open standard by a W3C Community Group.
+
+<!-- .element style="margin-top:50px"-->
+eWASM (Ethereum Flavoured WebAssembly) is an execution environment, based on a restricted subset of Webassembly. It will replace the EVM used currently.
+
+<!-- .element style="margin-top:50px"-->
+Not only will it activate the POS Ethereum chain and enable transactions on this chain, but it will also allow developpers to use a lot of differents languages to implement smart-contracts (Rust, C++...).
 
 
 
 ## Ethereum roadmap
 
-Mid-2019 : Casper POS 
-2020 : Sharding
+End of 2019 at best : Serenity Phase 0
+
+<!-- .element style="margin-top:50px"-->
+Likely around 2021 : Serenity Phase 2 and fully functionnal Ethereum 2.0 POS and scaled blockchain
