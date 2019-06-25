@@ -241,6 +241,10 @@ https://blockchaincanvas.files.wordpress.com/2017/05/blockchain-canevas-vf-2016-
 
 
 
+<!-- .slide: class="page-questions" -->
+
+
+
 # TP : pitch your blockchain project
 
 <!-- .slide: class="page-tp0" -->

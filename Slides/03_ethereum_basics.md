@@ -690,14 +690,4 @@ With the pruning algorithm, hard drive usage won't grow exponentially. (On the s
 
 
 
-# Private network big picture
-
-<figure> 
-    <img src="ressources/private_network_goal.png" alt="goal" height="500px"/>
-</figure>
-
-
-
-# TP : Setup your private Ethereum blockchain
-
-<!-- .slide: class="page-tp1" -->
+<!-- .slide: class="page-questions" -->

@@ -1,4 +1,4 @@
-pragma solidity >=0.5.0 <0.7.0;
+pragma solidity 0.5.0;
 pragma experimental ABIEncoderV2;
 
 contract Betting{
@@ -32,7 +32,7 @@ contract Betting{
         emit MatchCreation(_homeTeam, _externalTeam, _label, _date, matchIDGenerator, _quotation);
         matchs.push(Match(matchIDGenerator, _homeTeam, _externalTeam, MatchState.UNSETTLED, _label, _date, _quotation));
     }
-    
+
     event MatchResolution(uint match_id, uint matchState);
     event debugResolvedMatch(uint match_id, bool homeVictory, bool equality, uint matchState);
     function resolveMatch(uint _match_id, bool _homeVictory, bool _equality) external {   
@@ -47,5 +47,5 @@ contract Betting{
             currentMatch.matchState = MatchState.CHALLENGER_VICTORY;
         }
         emit MatchResolution(_match_id, uint(currentMatch.matchState));
-    }   
+    }
 }

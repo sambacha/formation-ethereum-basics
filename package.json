@@ -1,12 +1,12 @@
 {
-  "name": "zenika-formation-modele",
+  "name": "Ethereum basics",
   "description": "Exemple canonique d'un repository de formation. Peut être forké pour créer une nouvelle formation.",
   "version": "1.0.0",
   "author": "Zenika",
   "homepage": "https://training.zenika.com/formations/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Zenika/Formation--Modele"
+    "url": "https://github.com/Zenika/formation-ethereum-basics"
   },
   "private": true,
   "dependencies": {

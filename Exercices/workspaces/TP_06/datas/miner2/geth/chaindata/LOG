@@ -1,0 +1,44 @@
+=============== May 4, 2019 (UTC) ===============
+08:27:10.230253 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+08:27:10.246320 db@open opening
+08:27:10.250895 version@stat F·[] S·0B[] Sc·[]
+08:27:10.254520 db@janitor F·2 G·0
+08:27:10.254547 db@open done T·8.2154ms
+08:27:10.701013 db@close closing
+08:27:10.741781 db@close done T·40.7654ms
+=============== May 4, 2019 (UTC) ===============
+11:21:03.065067 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:21:03.072952 version@stat F·[] S·0B[] Sc·[]
+11:21:03.073642 db@open opening
+11:21:03.075347 journal@recovery F·1
+11:21:03.077147 journal@recovery recovering @1
+11:21:03.200909 memdb@flush created L0@2 N·21260 S·1MiB "\x00\x00\xae..\x82\x88\x11,v9389":"\xff\xfc\x94..\xa5\x05\xa1,v9518"
+11:21:03.207524 version@stat F·[1] S·1MiB[1MiB] Sc·[0.25]
+11:21:03.422646 db@janitor F·3 G·0
+11:21:03.423078 db@open done T·349.1106ms
+11:21:03.676766 db@close closing
+11:21:03.683993 db@close done T·7.2242ms
+=============== May 10, 2019 (UTC) ===============
+01:11:51.436359 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+01:11:51.441956 version@stat F·[1] S·1MiB[1MiB] Sc·[0.25]
+01:11:51.442472 db@open opening
+01:11:51.443880 journal@recovery F·1
+01:11:51.452414 journal@recovery recovering @3
+01:11:51.462508 memdb@flush created L0@5 N·3 S·521B "Dat..ion,v21263":"eth..ˏ\xa3,v21262"
+01:11:51.469024 version@stat F·[2] S·1MiB[1MiB] Sc·[0.50]
+01:11:51.636410 db@janitor F·4 G·0
+01:11:51.637409 db@open done T·194.7907ms
+01:11:51.848945 db@close closing
+01:11:51.853544 db@close done T·4.5957ms
+=============== Jun 9, 2019 (UTC) ===============
+16:53:57.862876 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:53:57.874996 version@stat F·[2] S·1MiB[1MiB] Sc·[0.50]
+16:53:57.875390 db@open opening
+16:53:57.876376 journal@recovery F·1
+16:53:57.877755 journal@recovery recovering @6
+16:53:57.891630 memdb@flush created L0@8 N·3 S·521B "Dat..ion,v21267":"eth..ˏ\xa3,v21266"
+16:53:57.894708 version@stat F·[3] S·1MiB[1MiB] Sc·[0.75]
+16:53:57.921857 db@janitor F·5 G·0
+16:53:57.922643 db@open done T·47.0799ms
+16:53:58.108927 db@close closing
+16:53:58.113609 db@close done T·4.6792ms

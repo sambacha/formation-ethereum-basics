@@ -1,9 +1,9 @@
 [
   "Cahier.md",
-  "01_deploy_ethereum_network.md",
-  "02_first_smart_contract_remix_ide.md",
-  "03_getting_started_with_truffle.md",
-  "04_manage_matchs.md",
-  "05_plug_with_react.md",
-  "06_manage_bets.md"
+  "01_first_smart_contract_remix_ide.md",
+  "02_getting_started_with_truffle.md",
+  "03_manage_matchs.md",
+  "04_plug_with_react.md",
+  "05_manage_bets.md",
+  "06_deploy_ethereum_network.md"
 ]

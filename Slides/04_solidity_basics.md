@@ -489,7 +489,10 @@ A D-App allowing users to gamble on football matchs in a decentralized fashion.
 </figure>
 
 
+<!-- .slide: class="page-questions" -->
 
-# TP2 - First smart contract on Remix IDE
 
-<!-- .slide: class="page-tp2" -->
+
+# TP1 - First smart contract on Remix IDE
+
+<!-- .slide: class="page-tp1" -->

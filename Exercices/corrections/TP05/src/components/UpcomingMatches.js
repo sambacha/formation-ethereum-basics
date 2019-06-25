@@ -7,7 +7,7 @@ class UpcomingMatches extends Component {
     this.selectedMatchUpdate = this.selectedMatchUpdate.bind(this)
   }
 
-
+  
 
   selectedMatchUpdate(selectedMatch) {
     this.props.callback(selectedMatch)

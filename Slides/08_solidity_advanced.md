@@ -353,5 +353,5 @@ abort execution and revert state changes, providing an explanatory string
 
 
 
-# TP 7 : Adding the betting functionality
+# TP 5 : Adding the betting functionality
 <!-- .slide: class="page-tp5" -->

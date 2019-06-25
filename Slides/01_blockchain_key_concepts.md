@@ -1425,11 +1425,17 @@ In order to control 51% of the miners of the bitcoin blockchain, you would have 
 And even so the attacker could effectively destroy the whole network, he would likely be more incitated to behave properly to retain the value of the cryptocurrencies he will gain while mining.
 But this type of attack could very likely be setup be a governement or a big company wishing to destroy a technology they could perceive as a threat.
 
-Drawbacks : 
-What you can do with a 51% attack : 
+Drawbacks :
+What you can do with a 51% attack :
+
 - rewrite some transaction in the most recent blocks (but you can theoritically rewrite any blocks you want if you keep the majority for enought time) ,
 - mine empty blocks to incapacitate the network (all transactions could be prevented from being validated),
 - prevent some transactions from being validated in your mined blocks
 
-What you cannot do : 
+What you cannot do :
+
 - impersonnate another member of the network : you can't spend a coin that is not your as you still don't have the private key needed,
+
+
+
+<!-- .slide: class="page-questions" -->

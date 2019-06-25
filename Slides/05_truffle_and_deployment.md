@@ -157,8 +157,8 @@ Quickly create a test blockchain, with some account already initialized and alim
 
 
 
-# TP 3 : Deploying our smart contract
-<!-- .slide: class="page-tp3" -->
+# TP 2 : Deploying our smart contract
+<!-- .slide: class="page-tp2" -->
 
 Notes : 
 https://truffleframework.com/tutorials/using-infura-custom-provider
