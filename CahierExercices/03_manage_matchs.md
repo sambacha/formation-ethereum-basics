@@ -66,4 +66,4 @@ Ce fichier a déjà une première fonction de tests unitaires en place.
   - Le résoudre en indiquant une victoire du challenger.
   - Vérifier que le statut du match est victoire du challenger après résolution.
 
-
+<div class="pb"></div>

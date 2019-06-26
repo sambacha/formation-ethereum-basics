@@ -1,4 +1,4 @@
-# Head first in Ethereum
+# Ethereum basics
 
 <!-- .slide: class="page-title" -->
 

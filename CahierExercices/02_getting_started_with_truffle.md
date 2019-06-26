@@ -59,3 +59,6 @@ module.exports = function(deployer) {
 
 - Deployez votre smart contract sur votre blockchain local avec la commande `npx truffle deploy --reset --contracts_build_directory=./src/contracts`.
 - Avec Ganache verifiez que votre smart contract a bien été déployé.
+
+<div class="pb"></div>
+

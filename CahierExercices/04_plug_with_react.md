@@ -81,3 +81,5 @@ Vous devez donc :
 ## Implémenter la fonctionnalité de résolution de match
 
 Pour en terminer avec la gestion des matchs, nous allons maintenant d'implémenter la fonction `resolveMatch` qui permettra d'indiquer au smart contract qu'un match est terminé, ainsi que le résultat du match.
+
+<div class="pb"></div>

@@ -391,6 +391,12 @@ L'existence d'une brèche secrète permet cependant à la personne qui a conçu 
 
 - To decrypt : multiply it by itself priv times and you get back to the original number.
 
+Notes : 
+Example 3 X 5 = 15
+pub key = 6 and priv key = 7
+9 = 9^6 = 531 441‬ % 15 = 6 
+9^7 = 4 782 969 % 15 = 9
+
 
 
 ## Elliptic Curve Digital Signature Algorithm

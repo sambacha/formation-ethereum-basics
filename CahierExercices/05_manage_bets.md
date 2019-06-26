@@ -109,3 +109,5 @@ Cet appel prend la forme :
 ```
 
 Vous devez reconstituer les paris à partir du tableau de tableaux que vous renvoie la méthode `getUserBets`.
+
+<div class="pb"></div>

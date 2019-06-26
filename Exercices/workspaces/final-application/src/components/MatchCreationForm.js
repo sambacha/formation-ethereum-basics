@@ -87,9 +87,7 @@ class MatchCreationForm extends Component {
           <label htmlFor="homeTeam"> Home team </label>
           <label htmlFor="externalTeam"> External team </label>
           <input id="homeTeam" type="text" onChange={this.onChangeMatchHomeTeam} />
-          {' '}
--
-          {' '}
+          <span id='teamSeparator'>-</span>
           <input id="externalTeam" type="text" onChange={this.onChangeMatchExternalTeam} />
           <label htmlFor="homeVictoryQuotation"> Home victory quotation </label>
           <RadioGroup id="homeVictoryQuotation" onChange={this.onChangeMatchHomeVictoryQuotation} defaultValue="3">

@@ -47,7 +47,7 @@ class BetService {
   }
 
   getBetContractPubKey() {
-    return '0x9852626D08e4a918B83fA42c1fE6f8C55844121e'
+    return '0x49BCc812FcbfECD213a7D54AB35309b30dFD8b94'
   }
 
   fromWei(number){

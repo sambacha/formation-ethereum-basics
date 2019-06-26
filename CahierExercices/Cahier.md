@@ -5,3 +5,15 @@
 </div>
 <div class="pb"></div>
 
+
+# Prerequisite
+
+Install :
+- your favorite IDE
+- Chrome
+- Metamask
+- Ganache
+- NodeJs
+- Docker
+
+<div class="pb"></div>
