@@ -247,7 +247,14 @@ contract Ballot {
         address delegate; // person delegated to
         uint vote;   // index of the voted proposal
     }
-}
+    
+    function myFunctionUsingVoter() external {
+        Voter voter1 = Voter(1,false,'0xd343FEd394302', 5);
+        Voter voter2 = Voter({voted: true, weight:2, vote: 5});
+        Voter memory inMemoryVoter; // for temporary data
+        inMemoryVoter.voted = true; // will only write to memory
+
+    }
 ```
 
 
@@ -404,6 +411,40 @@ for (uint i=0; i<10; i++) {
   // do something
 }
 
+```
+
+
+
+## Events
+
+Events are used to log datas in ongoing function execution.
+Useful for debugging.
+
+The syntax is : 
+
+```javascript
+event <eventName>([<type> value1] [, <type> value2]...);
+```
+
+To trigger a event : 
+
+```javascript
+emit <eventName>(value1, value2);
+```
+
+
+
+## Event example
+
+To trace a function call :
+
+```javascript
+event CoolFunctionCalled(uint param1, string param2);
+
+function coolFunction(uint param1, string param2) {
+  emit CoolFunctionCalled(param1, param2);
+  // and thedo cool stuff
+}
 ```
 
 

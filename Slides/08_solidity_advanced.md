@@ -172,39 +172,6 @@ will fail
 
 
 
-## Events
-
-Events are used to log datas in ongoing function execution.
-Useful for debugging.
-
-The syntax is : 
-
-```javascript
-event <eventName>([<type> value1] [, <type> value2]...);
-```
-
-To trigger a event : 
-
-```javascript
-emit <eventName>(value1, value2);
-```
-
-
-## Event example
-
-To trace a function call :
-
-```javascript
-event CoolFunctionCalled(uint param1, string param2);
-
-function coolFunction(uint param1, string param2) {
-  emit CoolFunctionCalled(param1, param2);
-  // and thedo cool stuff
-}
-```
-
-
-
 ## Modifiers
 
 Modifiers are used to modify the behavior of functions.

@@ -25,11 +25,12 @@ Cette commande va créer l'arborescence suivante :
 `truffle-config.js` : fichier de configuration du projet Truffle
 
 
-- Dans le fichier `truffle-config.js`, prendre connaissance des informations présentes et ajouter la pair clé / valeur `contracts_build_directory: "src/contracts"` :
+- Dans le fichier `truffle-config.js`, prendre connaissance des informations présentes et ajouter la pair clé / valeur `contracts_build_directory: "src/contracts",` :
 ```Javascript
 module.exports {
   ...
-  contracts_build_directory: "src/contracts"
+  contracts_build_directory: "src/contracts",
+  ...
 }
 ```
 

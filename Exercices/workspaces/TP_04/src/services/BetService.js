@@ -30,7 +30,7 @@ class BetService {
 
     this.eventSubject = new Subject()
 
-    //TO COMPLETE IN TP05
+    //TO COMPLETE IN TP04
     this.state.MyContract
     this.state.ContractInstance
 
@@ -47,17 +47,17 @@ class BetService {
 
 
   resolveMatch(matchId, hasHomeTeamWon, wasThereEquality) {
-    //TO COMPLETE IN TP05
+    //TO COMPLETE IN TP04
   }
 
   
   createMatch(homeTeam, challengerTeam, libelle, date, quotation) {
-    //TO COMPLETE IN TP05
+    //TO COMPLETE IN TP04
   }
    
   getMatchesToBetOn(){
     return new Promise((resolve, reject) => {
-      //TO COMPLETE IN TP05
+      //TO COMPLETE IN TP04
       let matches = [{
         id: 0, 
         homeTeam: 'hometeam1', 
@@ -115,19 +115,12 @@ class BetService {
     })
   }
 
-  getBalance(account) {
-    new Promise((resolve, reject) => {
-      //TO REPLACE IN TP05 BY COMMENTED BLOCK BELOW
-      let amount = 10000000000000000
-      resolve(amount)
-      //   this.web3<insert getBalanceFonction>(account, (error, result) => {
-      //   if (error) {
-      //     reject(error)
-      //   } else {
-      //     resolve(<insert fonction to convert result.toNumber()>)
-      //   }
-      // })
-    })
+  fromWei(number){
+    return this.web3.fromWei(number,'ether');
+  }
+
+  getBalance(account, callback) {
+    callback(10000000000);
   }
 
   getCurrentEthereumAccountPubKey() {
@@ -139,7 +132,7 @@ class BetService {
 
   }
   getBets() {
-    //TO COMPLETE IN TP05
+    //TO COMPLETE IN TP04
     return new Promise((resolve, reject) => {
             let bets = [
               {

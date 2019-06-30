@@ -2,7 +2,7 @@
 
 ## Mise en place du front-end
 
-- Copier dans un nouveau répertoire de travail le pack de démarrage du TP5 (`workspaces/TP_04`). Ce répertoire contient un frontend react de gestion de pari. Ce front end est fonctionnel mais non lié à la blockchain.
+- Copier dans un nouveau répertoire de travail le pack de démarrage du TP (`workspaces/TP_04`). Ce répertoire contient un frontend react de gestion de pari. Ce front end est fonctionnel mais non lié à la blockchain.
 Ici, plutôt que de lier ce front-end à un backend standard, nous allons le lier à la blockchain.
 
 - Dans votre répertoire de travail, installer les dépendances npm via la commande `npm install`.
@@ -14,9 +14,10 @@ Nota-bene : Si vous ne connaissez pas React, pas de panique ! Toutes les modific
 ## Lien de l'applicatif avec la blockchain Ethereum
 
 - En pré-requis, Metamask doit être installé dans votre navigateur et branché sur la blockchain Ganache de test.
+- Déployer votre smart contract sur une nouvelle blockchain de test liée au `truffle-config.js` du TP en cours.
 - Dans le fichier `src/services/BetService.js`, dans le constructeur de la classe, récupérer l'objet `Web3` mis à disposition par Metamask qui est l'interface qui va vous permettre de communiquer avec la blockchain branchée dans Metamask : `this.web3 = new Web3(window.web3.currentProvider)`.
 - Dans Ganache, récupérez l'adresse publique de votre contrat et renvoyez la dans la fonction `getBetContractPubKey`.
-   
+
 ## Premières interrogations de la blockchain
 
 - Dans BetService.js, modifiez la méthode `getCurrentEthereumAccountPubKey()` et utilisez l'object Web3 ainsi instancié pour récupérez la clé publique du wallet sélectionné par Metamask. Indice, cette clé publique est récupérable à l'index 0 du tableau `eth.accounts`.
@@ -26,7 +27,7 @@ Nota-bene : Si vous ne connaissez pas React, pas de panique ! Toutes les modific
 
 ## Connexion avec le smart contract
 
-- Importez l'interface de votre smart contract, puis, à partir de cette interface, créez une instance du contrat pour accèder à ses fonctions : 
+- Importez l'interface de votre smart contract, puis, à partir de cette interface, créez une instance du contrat pour accèder à ses fonctions :
 
 ```js
 import betContract from '../contracts/Betting.json'
